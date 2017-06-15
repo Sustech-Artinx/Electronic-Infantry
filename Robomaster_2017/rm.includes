@@ -1,0 +1,11 @@
+Drivers/CMSIS/Device/ST/STM32F4xx/Include
+Drivers/CMSIS/Include
+Drivers/STM32F4xx_HAL_Driver/Inc
+Drivers/STM32F4xx_HAL_Driver/Inc/Legacy
+Inc
+MDK-ARM/app
+MDK-ARM/bsp
+MDK-ARM/RTE
+Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS
+Middlewares/Third_Party/FreeRTOS/Source/include
+Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F
