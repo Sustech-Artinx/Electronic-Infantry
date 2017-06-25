@@ -1,0 +1,67 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ¦ÌVision V5.20.0.0
+Copyright (C) 2016 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: hu yushen, sustc, LIC=SDA12-9HYI5-LQ00Q-NADPT-EIBFH-Z9580
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Plus  Version: 5.20
+Toolchain Path:  E:\Keil5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 2 (build 183)
+Assembler:       Armasm.exe V5.06 update 2 (build 183)
+Linker/Locator:  ArmLink.exe V5.06 update 2 (build 183)
+Library Manager: ArmAr.exe V5.06 update 2 (build 183)
+Hex Converter:   FromElf.exe V5.06 update 2 (build 183)
+CPU DLL:         SARMCM3.DLL V5.20
+Dialog DLL:      DCM.DLL V1.13.7.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V2.0.18.0
+Dialog DLL:      TCM.DLL V1.14.9.0
+ 
+<h2>Project:</h2>
+C:\Users\Nigel_hu\Desktop\RM_competition\Artinx_new\artinx_new\MDK-ARM\artinx_new.uvprojx
+Project File Date:  03/04/2017
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 2 (build 183)', folder: 'E:\Keil5\ARM\ARMCC\Bin'
+Build target 'artinx_new'
+compiling tim.c...
+..\Src\tim.c(39): error:  #5: cannot open source input file "led.h": No such file or directory
+  #include "led.h"
+..\Src\tim.c: 0 warnings, 1 error
+compiling stm32f4xx_it.c...
+..\Src\stm32f4xx_it.c(39): error:  #5: cannot open source input file "dbus.h": No such file or directory
+  #include "dbus.h"
+..\Src\stm32f4xx_it.c: 0 warnings, 1 error
+compiling main.c...
+..\Src\main.c(46): error:  #5: cannot open source input file "delay.h": No such file or directory
+  #include "delay.h"
+..\Src\main.c: 0 warnings, 1 error
+compiling system_stm32f4xx.c...
+"no source": Error:  #5: cannot open source input file "../../../../../../../../../../Src/system_stm32f4xx.c": No such file or directory
+../../../../../../../../../../Src/system_stm32f4xx.c: 0 warnings, 1 error
+"artinx_new\artinx_new.axf" - 3 Error(s), 0 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.4.5.0.pack
+                ARM::CMSIS:CORE:4.3.0
+                CMSIS (Cortex Microcontroller Software Interface Standard)
+   * Component: CORE Version: 4.3.0
+
+<h2>Collection of Component include folders:</h2>
+  C:\Users\Nigel_hu\Desktop\RM_competition\Artinx_new\artinx_new\MDK-ARM\RTE
+  E:\Keil5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include
+  E:\Keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:4.3.0
+Target not created.
+Build Time Elapsed:  00:00:23
+</pre>
+</body>
+</html>
