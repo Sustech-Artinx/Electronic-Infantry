@@ -1,0 +1,25 @@
+[package]
+name = "rust32"
+version = "0.1.0"
+authors = ["Fan Jiang <i@fanjiang.me>"]
+
+[dependencies]
+spin = "0.4.5"
+stm32f427x = { path = "stm32f427x" }
+cortex-m = "0.2.4"
+
+[lib]
+crate-type = ["staticlib"]
+
+[features]
+default = []
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+lto = true
+panic = "abort"
+
+[profile.test]
+panic = "abort"
