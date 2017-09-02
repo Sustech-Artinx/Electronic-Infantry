@@ -38,10 +38,10 @@ void Gimbal_Control(void)
 {
 	//外环PID控制
 	//计算位置闭环输出量
-	yaw.position_output = Position_Control_205(yaw.thisAngle,yaw.targetAngle);
+	//yaw.position_output = Position_Control_205(yaw.thisAngle,yaw.targetAngle);
 	//内环PID控制
   //Yaw.velocity_output = Velocity_Control_205(-MPU6050_Real_Data.Gyro_Z ,Yaw.position_output);
-  yaw.velocity_output = Velocity_Control_205(-imu_data.gz ,yaw.position_output);
+  //yaw.velocity_output = Velocity_Control_205(-imu_data.gz ,yaw.position_output);
 	//计算位置闭环输出量
 	pitch.position_output = Position_Control_206(pitch.thisAngle,pitch.targetAngle);
 	//内环PID控制
@@ -53,13 +53,12 @@ void Gimbal_Control(void)
   //Cmd_ESC(0,pitch.velocity_output);
 	//Cmd_ESC(0,0);
 	//Cmd_ESC(yaw.velocity_output,0);
-	//printf("%d--%d\n",pitch.thisAngle,yaw.thisAngle);
+	printf("%d--%d\n",pitch.thisAngle,yaw.thisAngle);
 	//printf("%d\n",imu_data.gx);
 }
 
 /*********************************************************************
 Name：         void Trigger_Control(int16_t x, int16_t y, uint16_t ch3)
-
 Description：  云台远程控制程序（遥控器和键盘）            
 *********************************************************************/
 

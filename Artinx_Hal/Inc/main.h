@@ -81,10 +81,10 @@
 	#define PITCH_DOWN 1320
 	#define PITCH_MID 1550
 	//云台PID
-	#define YAW_205_VEL_P 20.0
+	#define YAW_205_VEL_P 8.0
 	#define YAW_205_VEL_D 0.0
 	#define YAW_205_POS_P 2.0
-	#define YAW_205_POS_I 0.0
+	#define YAW_205_POS_I 0.01
 	#define YAW_205_POS_D 0.1
 	#define PITCH_206_VEL_P 20.0
 	#define PITCH_206_VEL_D 0.0
@@ -109,23 +109,23 @@
 	#define RM3510 
 
 	//云台角度
-	#define YAW_LEFT 20//545
-	#define YAW_RIGHT	2400//5887
-	#define YAW_MID 1085//3250
+	#define YAW_LEFT 240//545
+	#define YAW_RIGHT	2000//5887
+	#define YAW_MID 1050//3250
 	#define PITCH_UP 3000//1100
-	#define PITCH_DOWN 2000//-350
-	#define PITCH_MID 2400//200
+	#define PITCH_DOWN 2150//-350
+	#define PITCH_MID 2500//200
 	//云台PID
 	#define YAW_205_VEL_P 8.0
 	#define YAW_205_VEL_D 0.0
 	#define YAW_205_POS_P 2.0
 	#define YAW_205_POS_I 0.01
 	#define YAW_205_POS_D 0.1
-	#define PITCH_206_VEL_P 10.0
+	#define PITCH_206_VEL_P 5 //10.0
 	#define PITCH_206_VEL_D 0.0
-	#define PITCH_206_POS_P 1.0
+	#define PITCH_206_POS_P 0.5 //1.0
 	#define PITCH_206_POS_I 0.0
-	#define PITCH_206_POS_D 1.0
+	#define PITCH_206_POS_D 0 //0.5
 	
 	//定义RM3510的pid
 	#define ESC_820R_VEL_P 10.0//10.0
@@ -177,23 +177,23 @@
 	#define RM3510 
 
 	//云台角度
-	#define YAW_LEFT 4000
-	#define YAW_RIGHT	6150
-	#define YAW_MID 5290
-	#define PITCH_UP 6600
-	#define PITCH_DOWN 5500
-	#define PITCH_MID 5680
+	#define YAW_LEFT 4000 
+	#define YAW_RIGHT	6000
+	#define YAW_MID 5400
+	#define PITCH_UP 6600  
+	#define PITCH_MID  5600
+	#define PITCH_DOWN 5000 //最低不能让摩擦轮打到云台支架
 	//云台PID
 	#define YAW_205_VEL_P 9.0
 	#define YAW_205_VEL_D 0.0
-	#define YAW_205_POS_P 2.0
+	#define YAW_205_POS_P 3 //2.0
 	#define YAW_205_POS_I 0.01
 	#define YAW_205_POS_D 0.1
-	#define PITCH_206_VEL_P 11.0
+	#define PITCH_206_VEL_P 6 //11.0
 	#define PITCH_206_VEL_D 0.0
-	#define PITCH_206_POS_P 1.0
+	#define PITCH_206_POS_P 0.6 //1.0
 	#define PITCH_206_POS_I 0.0
-	#define PITCH_206_POS_D 0.5
+	#define PITCH_206_POS_D 0 //0.5
 	
 	//定义RM3510的pid
 #define ESC_820R_VEL_P 10.0//10.0
