@@ -38,10 +38,10 @@ void Gimbal_Control(void)
 {
 	//外环PID控制
 	//计算位置闭环输出量
-	//yaw.position_output = Position_Control_205(yaw.thisAngle,yaw.targetAngle);
+	yaw.position_output = Position_Control_205(yaw.thisAngle,yaw.targetAngle);
 	//内环PID控制
   //Yaw.velocity_output = Velocity_Control_205(-MPU6050_Real_Data.Gyro_Z ,Yaw.position_output);
-  //yaw.velocity_output = Velocity_Control_205(-imu_data.gz ,yaw.position_output);
+  yaw.velocity_output = Velocity_Control_205(-imu_data.gz ,yaw.position_output);
 	//计算位置闭环输出量
 	pitch.position_output = Position_Control_206(pitch.thisAngle,pitch.targetAngle);
 	//内环PID控制

@@ -177,9 +177,9 @@
 	#define RM3510 
 
 	//云台角度
-	#define YAW_LEFT 4000 
-	#define YAW_RIGHT	6000
-	#define YAW_MID 5400
+	#define YAW_LEFT 2000 
+	#define YAW_RIGHT	4400
+	#define YAW_MID 2700
 	#define PITCH_UP 6600  
 	#define PITCH_MID  5600
 	#define PITCH_DOWN 5000 //最低不能让摩擦轮打到云台支架
@@ -191,9 +191,9 @@
 	#define YAW_205_POS_D 0.1
 	#define PITCH_206_VEL_P 6 //11.0
 	#define PITCH_206_VEL_D 0.0
-	#define PITCH_206_POS_P 0.6 //1.0
+	#define PITCH_206_POS_P 0.8 //1.0
 	#define PITCH_206_POS_I 0.0
-	#define PITCH_206_POS_D 0 //0.5
+	#define PITCH_206_POS_D 0.5 //0.5
 	
 	//定义RM3510的pid
 #define ESC_820R_VEL_P 10.0//10.0
