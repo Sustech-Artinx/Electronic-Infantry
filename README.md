@@ -6,3 +6,6 @@ Code for Artinx
 + 串口都预先打开DMA
 + 云台传输两个坐标
 + 调整优先级，使机器稳定
+
+
+You can see more detain in our [wiki](https://github.com/Sustech-Artinx/Electronic-Infantry/wiki) page

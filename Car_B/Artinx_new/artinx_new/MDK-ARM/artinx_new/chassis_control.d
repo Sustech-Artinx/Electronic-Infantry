@@ -1,6 +1,6 @@
 artinx_new\chassis_control.o: ..\Mylib\chassis_control.c
 artinx_new\chassis_control.o: ..\Mylib\chassis_control.h
-artinx_new\chassis_control.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+artinx_new\chassis_control.o: D:\Program Files\ARM\ARMCC\Bin\..\include\stdint.h
 artinx_new\chassis_control.o: ..\Mylib\pid_algorithm.h
 artinx_new\chassis_control.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 artinx_new\chassis_control.o: ../Inc/stm32f4xx_hal_conf.h
@@ -17,7 +17,7 @@ artinx_new\chassis_control.o: ../Drivers/CMSIS/Include/core_cmSimd.h
 artinx_new\chassis_control.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h
 artinx_new\chassis_control.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 artinx_new\chassis_control.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-artinx_new\chassis_control.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+artinx_new\chassis_control.o: D:\Program Files\ARM\ARMCC\Bin\..\include\stdio.h
 artinx_new\chassis_control.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h
 artinx_new\chassis_control.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h
 artinx_new\chassis_control.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h
