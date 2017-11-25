@@ -1,18 +1,18 @@
 /************************************************************************************
-  File Name     :  gimbal_control.c 
+  File Name     :  gimbal_control.c
   cpu           :  STM32F405RGT6
   Create Date   :  2016/6/29
   Author        :  yf
-  Description   :  Õë¶Ô6623ÔÆÌ¨pithcºÍyawÖáÔË¶¯µÄ×ÔÏÂ¶øÉÏµÄ¿ØÖÆ¡£
-									 ÆäÖÐÊ×ÏÈÊÇÁ½ÖáÔÆÌ¨£¨2DOF£©µÄPIDÎ»ÖÃ»·µÄ¿ØÖÆ£¬
-									 È»ºóÊÇÔÆÌ¨Ô¶³Ì¿ØÖÆº¯Êý£¨Ò£¿ØÆ÷ºÍ¼üÊó£©£¬¼üÊóÓÅÏÈ¼¶¸ü¸ßÒ»Ð©¡£
-									 
+  Description   :  ï¿½ï¿½ï¿½ï¿½6623ï¿½ï¿½Ì¨pithcï¿½ï¿½yawï¿½ï¿½ï¿½Ë¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¶ï¿½ï¿½ÏµÄ¿ï¿½ï¿½Æ¡ï¿½
+									 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¨ï¿½ï¿½2DOFï¿½ï¿½ï¿½ï¿½PIDÎ»ï¿½Ã»ï¿½ï¿½Ä¿ï¿½ï¿½Æ£ï¿½
+									 È»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¨Ô¶ï¿½Ì¿ï¿½ï¿½Æºï¿½ï¿½ï¿½ï¿½ï¿½Ò£ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ó£©£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¼ï¿½ï¿½ï¿½ï¿½ï¿½Ò»Ð©ï¿½ï¿½
+
 
 -------------------------------Revision Histroy-----------------------------------
-No   Version    Date     Revised By       Item       Description   
-1     1.1       6/28       yf   			  Á½²ãÔÆÌ¨¿ØÖÆ	
-2     1.2       6/29       gyf 
-3     1.3       6/29       yf 					  ×¢ÊÍ			   
+No   Version    Date     Revised By       Item       Description
+1     1.1       6/28       yf   			  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¨ï¿½ï¿½ï¿½ï¿½
+2     1.2       6/29       gyf
+3     1.3       6/29       yf 					  ×¢ï¿½ï¿½
 ************************************************************************************/
 //#include "i2c_mpu6050.h"
 #include "gimbal_control.h"
@@ -22,33 +22,33 @@ No   Version    Date     Revised By       Item       Description
 #include "i2c_mpu6050.h"
 #include "test_can2.h"
 
-//³õÊ¼»¯ÔÆÌ¨½Ç¶È
+//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ì¨ï¿½Ç¶ï¿½
 M6623 yaw = {YAW_LEFT,YAW_RIGHT,YAW_MID,0,0,0,0,YAW_MID,0,0};
 M6623 pitch = {PITCH_DOWN,PITCH_UP,PITCH_MID,0,0,0,0,PITCH_MID,0,0};
 double a=0;
 double b=0;
 
 /*********************************************************************
-Name£º          void Gimbal_Control(void)  
+Nameï¿½ï¿½          void Gimbal_Control(void)
 
-Description£º  ÔÆÌ¨¿ØÖÆ³ÌÐò
-               ÏòÉÏÔË¶¯µçÁ÷ÎªÕýÖµ
+Descriptionï¿½ï¿½  ï¿½ï¿½Ì¨ï¿½ï¿½ï¿½Æ³ï¿½ï¿½ï¿½
+               ï¿½ï¿½ï¿½ï¿½ï¿½Ë¶ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Öµ
 *********************************************************************/
-void Gimbal_Control(void)  
+void Gimbal_Control(void)
 {
-	//Íâ»·PID¿ØÖÆ
-	//¼ÆËãÎ»ÖÃ±Õ»·Êä³öÁ¿
+	//ï¿½â»·PIDï¿½ï¿½ï¿½ï¿½
+	//ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ã±Õ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	yaw.position_output = Position_Control_205(yaw.thisAngle,yaw.targetAngle);
-	//ÄÚ»·PID¿ØÖÆ
+	//ï¿½Ú»ï¿½PIDï¿½ï¿½ï¿½ï¿½
   //Yaw.velocity_output = Velocity_Control_205(-MPU6050_Real_Data.Gyro_Z ,Yaw.position_output);
   yaw.velocity_output = Velocity_Control_205(-imu_data.gz ,yaw.position_output);
-	//¼ÆËãÎ»ÖÃ±Õ»·Êä³öÁ¿
+	//ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ã±Õ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	pitch.position_output = Position_Control_206(pitch.thisAngle,pitch.targetAngle);
-	//ÄÚ»·PID¿ØÖÆ
+	//ï¿½Ú»ï¿½PIDï¿½ï¿½ï¿½ï¿½
   //Pitch.velocity_output = Velocity_Control_206(-MPU6050_Real_Data.Gyro_Y ,Pitch.position_output);
 	//pitch.velocity_output = Velocity_Control_206(0 ,pitch.position_output);
-	pitch.velocity_output = Velocity_Control_206(-imu_data.gy ,pitch.position_output);
-	//can1µÄÊý¾ÝÊä³ö£¬ÔÚÐ´³öcan1ºÍcan2ºóÐèÒª¼ÓÉÏ
+	pitch.velocity_output = Velocity_Control_206(imu_data.gy ,pitch.position_output);
+	//can1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½can1ï¿½ï¿½can2ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½
 	Cmd_ESC(yaw.velocity_output,pitch.velocity_output);
   //Cmd_ESC(0,pitch.velocity_output);
 	//Cmd_ESC(0,0);
@@ -58,20 +58,20 @@ void Gimbal_Control(void)
 }
 
 /*********************************************************************
-Name£º         void Trigger_Control(int16_t x, int16_t y, uint16_t ch3)
-Description£º  ÔÆÌ¨Ô¶³Ì¿ØÖÆ³ÌÐò£¨Ò£¿ØÆ÷ºÍ¼üÅÌ£©            
+Nameï¿½ï¿½         void Trigger_Control(int16_t x, int16_t y, uint16_t ch3)
+Descriptionï¿½ï¿½  ï¿½ï¿½Ì¨Ô¶ï¿½Ì¿ï¿½ï¿½Æ³ï¿½ï¿½ï¿½ï¿½ï¿½Ò£ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½Ì£ï¿½
 *********************************************************************/
 
 void Trigger_Control(int16_t x, int16_t y, uint16_t ch3)
 {
-				//ÔÝÊ±²»ÓÃyawÖá
+				//ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½yawï¿½ï¿½
 				if (yaw.targetAngle < yaw.minAngle){yaw.targetAngle=yaw.minAngle;}
-				if (yaw.targetAngle > yaw.maxAngle){yaw.targetAngle=yaw.maxAngle;}				
+				if (yaw.targetAngle > yaw.maxAngle){yaw.targetAngle=yaw.maxAngle;}
 				if (y>3) {pitch.targetAngle += -3;}
         if (y<-3) {pitch.targetAngle += 3;}
 				pitch.targetAngle += (float)((float)(ch3-1024)/100);
 				delay_us(500);
 				if (pitch.targetAngle < pitch.minAngle){pitch.targetAngle=pitch.minAngle;}
-				if (pitch.targetAngle > pitch.maxAngle){pitch.targetAngle=pitch.maxAngle;}		
-			
+				if (pitch.targetAngle > pitch.maxAngle){pitch.targetAngle=pitch.maxAngle;}
+
 }

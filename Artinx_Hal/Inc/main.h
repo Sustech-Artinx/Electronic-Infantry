@@ -54,33 +54,34 @@
 #define LED_GREEN_Pin GPIO_PIN_7
 #define LED_GREEN_GPIO_Port GPIOE
 /* USER CODE BEGIN Private defines */
-//³£ÓÃº¯Êý È¡×î´óÖµºÍ¾ø¶ÔÖµ
+//å¸¸ç”¨å‡½æ•°ï¼Œå–ç»å¯¹å€¼å’Œæœ€å¤§å€¼
 #define abs(x) ((x)>0? (x):(-(x)))
 #define maxs(a,b) (a>b? a:b)
-//¶¨Òå³µºÅ,Ö÷Òª¶ÔÓ¦µç»úºÍÔÆÌ¨
-#define CAR_C
-//¶¨Òå×Ô¶¯³µ
-#define AUTO_TRACK
+//å®šä¹‰è½¦å·ï¼Œä¸»è¦æ˜¯åº•ç›˜å’Œäº‘å°
+#define CAR_A
+//#define CAR_C
+//å®šä¹‰è‡ªåŠ¨è½¦
+//#define AUTO_TRACK
 //CAR1 RM35-ROBOMODULE_NEW
 //CAR2 RM35-ROBOMODULE_NEW
 //CAR3 RM3510
 
-//¶¨Òå¹¤×÷Óëµ÷ÊÔÄ£Ê½
+//å®šä¹‰å·¥ä½œä¸Žè°ƒè¯•æ¨¡å¼
 //#define DEBUG
 
-//¸ù¾Ý³µºÅ¶¨Òå
-#ifdef CAR_HERO   //Ó¢ÐÛ³µ
-	//¶¨Òåµ×ÅÌµç»ú
-	#define RM3510 
+//æ ¹æ®è½¦å·å®šä¹‰
+#ifdef CAR_HERO   //è‹±é›„è½¦
+	//å®šä¹‰åº•ç›˜
+	#define RM3510
 
-	//ÔÆÌ¨½Ç¶È
+	//å®šä¹‰äº‘å°è§’åº¦
 	#define YAW_LEFT -850
 	#define YAW_RIGHT	3150
 	#define YAW_MID 2095
 	#define PITCH_UP 2400
 	#define PITCH_DOWN 1320
 	#define PITCH_MID 1550
-	//ÔÆÌ¨PID
+	//å®šä¹‰äº‘å°PID
 	#define YAW_205_VEL_P 8.0
 	#define YAW_205_VEL_D 0.0
 	#define YAW_205_POS_P 2.0
@@ -91,8 +92,8 @@
 	#define PITCH_206_POS_P 1.0
 	#define PITCH_206_POS_I 0.0
 	#define PITCH_206_POS_D 1.0
-	
-	//¶¨ÒåRM3510µÄpid
+
+	//å®šä¹‰RM3510çš„pid
 	#define ESC_820R_VEL_P 10.0//10.0
 	#define ESC_820R_VEL_I 0.0
 	#define ESC_820R_VEL_D 0.5//0.5
@@ -105,17 +106,15 @@
 #endif
 
 #ifdef CAR_A
-	//¶¨Òåµ×ÅÌµç»ú
-	#define RM3510 
+	#define RM3510
 
-	//ÔÆÌ¨½Ç¶È
 	#define YAW_LEFT 240//545
 	#define YAW_RIGHT	2000//5887
 	#define YAW_MID 1050//3250
-	#define PITCH_UP 3000//1100
-	#define PITCH_DOWN 2150//-350
-	#define PITCH_MID 2500//200
-	//ÔÆÌ¨PID
+	#define PITCH_UP 5400//1100
+	#define PITCH_DOWN 4350//-350
+	#define PITCH_MID 4900//200
+	//äº‘å°PID
 	#define YAW_205_VEL_P 8.0
 	#define YAW_205_VEL_D 0.0
 	#define YAW_205_POS_P 2.0
@@ -126,8 +125,8 @@
 	#define PITCH_206_POS_P 0.5 //1.0
 	#define PITCH_206_POS_I 0.0
 	#define PITCH_206_POS_D 0 //0.5
-	
-	//¶¨ÒåRM3510µÄpid
+
+	//ï¿½ï¿½ï¿½ï¿½RM3510ï¿½ï¿½pid
 	#define ESC_820R_VEL_P 10.0//10.0
 	#define ESC_820R_VEL_I 0.0
 	#define ESC_820R_VEL_D 0.5//0.5
@@ -139,17 +138,17 @@
 #endif
 
 #ifdef CAR_B
-	//¶¨Òåµ×ÅÌµç»ú
-	#define RM3510 
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½
+	#define RM3510
 
-	//ÔÆÌ¨½Ç¶È
+	//ï¿½ï¿½Ì¨ï¿½Ç¶ï¿½
 	#define YAW_LEFT 1700
 	#define YAW_RIGHT	3700
 	#define YAW_MID 2830
 	#define PITCH_UP 5400
 	#define PITCH_DOWN 4350
 	#define PITCH_MID 4900
-	//ÔÆÌ¨PID
+	//ï¿½ï¿½Ì¨PID
 	#define YAW_205_VEL_P 8.0
 	#define YAW_205_VEL_D 0.0
 	#define YAW_205_POS_P 2.0
@@ -160,8 +159,8 @@
 	#define PITCH_206_POS_P 1.0
 	#define PITCH_206_POS_I 0.0
 	#define PITCH_206_POS_D 0.5
-	
-	//¶¨ÒåRM3510µÄpid
+
+	//ï¿½ï¿½ï¿½ï¿½RM3510ï¿½ï¿½pid
 	#define ESC_820R_VEL_P 10.0//10.0
 	#define ESC_820R_VEL_I 0.0
 	#define ESC_820R_VEL_D 0.5//0.5
@@ -173,17 +172,17 @@
 #endif
 
 #ifdef CAR_C
-	//¶¨Òåµ×ÅÌµç»ú
-	#define RM3510 
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½
+	#define RM3510
 
-	//ÔÆÌ¨½Ç¶È
-	#define YAW_LEFT 2000 
+	//ï¿½ï¿½Ì¨ï¿½Ç¶ï¿½
+	#define YAW_LEFT 2000
 	#define YAW_RIGHT	4400
 	#define YAW_MID 2700
-	#define PITCH_UP 6600  
+	#define PITCH_UP 6600
 	#define PITCH_MID  5600
-	#define PITCH_DOWN 5000 //×îµÍ²»ÄÜÈÃÄ¦²ÁÂÖ´òµ½ÔÆÌ¨Ö§¼Ü
-	//ÔÆÌ¨PID
+	#define PITCH_DOWN 5000 //ï¿½ï¿½ï¿½Í²ï¿½ï¿½ï¿½ï¿½ï¿½Ä¦ï¿½ï¿½ï¿½Ö´ï¿½ï¿½ï¿½ï¿½ï¿½Ì¨Ö§ï¿½ï¿½
+	//ï¿½ï¿½Ì¨PID
 	#define YAW_205_VEL_P 9.0
 	#define YAW_205_VEL_D 0.0
 	#define YAW_205_POS_P 3 //2.0
@@ -194,8 +193,8 @@
 	#define PITCH_206_POS_P 0.8 //1.0
 	#define PITCH_206_POS_I 0.0
 	#define PITCH_206_POS_D 0.5 //0.5
-	
-	//¶¨ÒåRM3510µÄpid
+
+	//ï¿½ï¿½ï¿½ï¿½RM3510ï¿½ï¿½pid
 #define ESC_820R_VEL_P 10.0//10.0
 #define ESC_820R_VEL_I 0.0
 #define ESC_820R_VEL_D 0.5//0.5
@@ -206,16 +205,16 @@
 	#define SHOOT_SPEED  5   //0-10000
 #endif
 
-//µ×ÅÌÔË¶¯ËÙ¶È¶¨Òå
+//ï¿½ï¿½ï¿½ï¿½ï¿½Ë¶ï¿½ï¿½Ù¶È¶ï¿½ï¿½ï¿½
  #define NormalSpeed 180
  #define HighSpeed 230
  #define LowSpeed 50
- 
+
  #define ch_up 1684
  #define ch_mid 1024
  #define ch_down 423
 
-//½ö½ö¶¨ÒåÇý¶¯°å¾Í¿ÉÒÔÖªµÀÓÃRM35µç»úÁË
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ï¿½ï¿½Öªï¿½ï¿½ï¿½ï¿½RM35ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //#ifdef ROBOMODULE_NEW
 //#define RM35
 //#endif
@@ -225,8 +224,8 @@
 //#endif
 
 
-//Ö®ºóÔÙÕûºÏ°É
-//¶¨ÒåÄ¦²ÁÂÖËÙ¶È
+//Ö®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½
+//ï¿½ï¿½ï¿½ï¿½Ä¦ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
 #define RUB_SPEED    1400  //1000-2200
 
 #define PWM1  TIM12->CCR1
@@ -237,11 +236,11 @@
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-*/ 
+*/
 
 #endif /* __MAIN_H */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
