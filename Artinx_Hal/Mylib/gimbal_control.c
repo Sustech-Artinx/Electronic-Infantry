@@ -41,7 +41,7 @@ void Gimbal_Control(void)
 	yaw.position_output = Position_Control_205(yaw.thisAngle,yaw.targetAngle);
 	//�ڻ�PID����
   //Yaw.velocity_output = Velocity_Control_205(-MPU6050_Real_Data.Gyro_Z ,Yaw.position_output);
-  yaw.velocity_output = Velocity_Control_205(-imu_data.gz ,yaw.position_output);
+  yaw.velocity_output = Velocity_Control_205(imu_data.gz ,yaw.position_output);
 	//����λ�ñջ�������
 	pitch.position_output = Position_Control_206(pitch.thisAngle,pitch.targetAngle);
 	//�ڻ�PID����

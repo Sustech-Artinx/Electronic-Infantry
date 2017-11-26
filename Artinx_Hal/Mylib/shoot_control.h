@@ -3,8 +3,8 @@
 #ifndef _SHOOT_CONTROL_H_
 #define _SHOOT_CONTROL_H_
 
-extern int rub_flag;//s2-1Î»¿ªÆô×´Ì¬
-extern int shoot_flag;//s2-2Î»¿ªÆô×´Ì¬
+extern int rub_flag;//s2-1Î»ï¿½ï¿½ï¿½ï¿½×´Ì¬
+extern int shoot_flag;//s2-2Î»ï¿½ï¿½ï¿½ï¿½×´Ì¬
 extern int shoot_speed_new;
 
 void ShootMotor_Velocity_Control(float TargetShootSpeed);

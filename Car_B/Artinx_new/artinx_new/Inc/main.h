@@ -113,9 +113,9 @@
 	#define YAW_LEFT 240//545
 	#define YAW_RIGHT	2000//5887
 	#define YAW_MID 1050//3250
-	#define PITCH_UP 3000//1100
-	#define PITCH_DOWN 2150//-350
-	#define PITCH_MID 2500//200
+	#define PITCH_UP 3500//1100
+	#define PITCH_DOWN 2650//-350
+	#define PITCH_MID 2900//200
 	//云台PID
 	#define YAW_205_VEL_P 8.0
 	#define YAW_205_VEL_D 0.0

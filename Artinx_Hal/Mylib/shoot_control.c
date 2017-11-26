@@ -6,31 +6,32 @@
 #include "encoder.h"
 #include "tim.h"
 
-uint8_t last_s2;//s2µÄÉÏÒ»´Îkey
+uint8_t last_s2;//s2ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½key
 uint8_t last_pressr;
-int rub_flag;//s2-1Î»¿ªÆô×´Ì¬
-int shoot_flag;//s2-2Î»¿ªÆô×´Ì¬
+int rub_flag;//s2-1Î»ï¿½ï¿½ï¿½ï¿½×´Ì¬
+int shoot_flag;//s2-2Î»ï¿½ï¿½ï¿½ï¿½×´Ì¬
 int shoot_speed_new;
 
 
-//²¦µ¯µç»úËÙ¶È»·¿ØÖÆº¯Êı£ºShootMotor_Velocity_Control(float TargetShootSpeed)ÔÚÄÄ¸ötimerÀïµ÷ÓÃĞèÒª¿¼ÂÇ£¬Éæ¼°µ½µ÷½ÚpidµÄÖµ
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶È»ï¿½ï¿½ï¿½ï¿½Æºï¿½ï¿½ï¿½ï¿½ï¿½ShootMotor_Velocity_Control(float TargetShootSpeed)ï¿½ï¿½ï¿½Ä¸ï¿½timerï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½Ç£ï¿½ï¿½æ¼°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½pidï¿½ï¿½Öµ
+
 void ShootMotor_Velocity_Control(float TargetShootSpeed)
 {
 	 int32_t PWM_Output;
 	 PWM_Output = (int32_t)Velocity_Control_Shoot((float)(GetQuadEncoderDiff()) ,TargetShootSpeed);
-	 ShootMotorSpeedSet(PWM_Output);
+	 ShootMotorSpeedSet(-PWM_Output);
 }
 
-//rcºÍkey¿ØÖÆÄ¦²ÁÂÖBLDC¿ªÆô
+//rcï¿½ï¿½keyï¿½ï¿½ï¿½ï¿½Ä¦ï¿½ï¿½ï¿½ï¿½BLDCï¿½ï¿½ï¿½ï¿½
 void BLDC_control(uint8_t s2, uint8_t press_r)
-{	
-	//¼üÅÌ¼üÎ»½âÎö
-	
+{
+	//ï¿½ï¿½ï¿½Ì¼ï¿½Î»ï¿½ï¿½ï¿½ï¿½
+
 	//int key_G = KEY_PRESSED_OFFSET_SHIFT & v; if (key_G!=0) key_G=1;
 
 	if (rub_flag == 1 && ( (s2==1 && last_s2!=s2) || (press_r == 1 && last_pressr!=press_r) ))
   {
-    //pwm¿ØÖÆµçµ÷2312 close£»
+    //pwmï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½2312 closeï¿½ï¿½
 			PWM1=1000;
 			PWM2=1000;
 	  	rub_flag=0;
@@ -38,8 +39,8 @@ void BLDC_control(uint8_t s2, uint8_t press_r)
   }
   else if (rub_flag == 0 && ( (s2==1 && last_s2!=s2) || (press_r == 1 && last_pressr!=press_r) ))
   {
-    
-		//pwm¿ØÖÆµçµ÷2312 open£»
+
+		//pwmï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½2312 openï¿½ï¿½
     		PWM1=RUB_SPEED;
 				PWM2=RUB_SPEED;
 		    printf("shoot_control_PWM");
@@ -51,7 +52,7 @@ void BLDC_control(uint8_t s2, uint8_t press_r)
 }
 
 
-//rcºÍmouse¿ØÖÆ²¦µ¯µç»ú¿ªÆô£¨¿ª»ğ£©
+//rcï¿½ï¿½mouseï¿½ï¿½ï¿½Æ²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 void Fire(uint8_t s2, uint8_t press_l)
 {
 	shoot_flag=0;
@@ -59,12 +60,12 @@ void Fire(uint8_t s2, uint8_t press_l)
   {
 
     shoot_flag=1;
-		
+
 	}
   if (shoot_flag == 1)
-	{ 
-		shoot_speed_new=1000;
-		
+	{
+		shoot_speed_new=-1000; //å¯æ§åˆ¶2006åå‘
+
 	}
 	else if(shoot_flag == 0)
 	{ PWM3=0;
@@ -72,5 +73,5 @@ void Fire(uint8_t s2, uint8_t press_l)
 	}
 	delay_us(10);
 	last_s2=s2;
-	
+
 }

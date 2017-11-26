@@ -671,7 +671,7 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* tim_baseHandle)
 void ShootMotorSpeedSet(int32_t MotorSpeed)//拨弹电机设置
 {		
 	if(MotorSpeed > PWMPeriod-PWMLOSS)    MotorSpeed =   PWMPeriod-PWMLOSS ;//上限 CCR的值必须小于或等于ARR的值
-	PWM3 = MotorSpeed;
+	PWM3 = -MotorSpeed;
 }
 
 //定时器操作

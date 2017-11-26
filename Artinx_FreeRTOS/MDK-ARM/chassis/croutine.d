@@ -1,7 +1,7 @@
 chassis\croutine.o: ../Middlewares/Third_Party/FreeRTOS/Source/croutine.c
 chassis\croutine.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-chassis\croutine.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-chassis\croutine.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+chassis\croutine.o: D:\Program Files\ARM\ARMCC\Bin\..\include\stddef.h
+chassis\croutine.o: D:\Program Files\ARM\ARMCC\Bin\..\include\stdint.h
 chassis\croutine.o: ../Inc/FreeRTOSConfig.h
 chassis\croutine.o: ../Inc/mxconstants.h
 chassis\croutine.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
