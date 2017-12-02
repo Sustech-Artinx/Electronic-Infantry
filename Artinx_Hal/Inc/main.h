@@ -110,9 +110,9 @@
 
 	#define YAW_LEFT 5450
 	#define YAW_RIGHT	5887
-	#define YAW_MID 2600//2500//2200
-	#define PITCH_UP 5000//4700//4900//1100
-	#define PITCH_DOWN  3750//3450//3650//-350
+	#define YAW_MID 2100//3000//2600//2500//2200
+	#define PITCH_UP 6250//4700//4900//1100 //对应向下 
+	#define PITCH_DOWN  3750//3450//3650//-350 //对应向上
 	#define PITCH_MID 5000//3100//3400//200
 	//云台PID
 	#define YAW_205_VEL_P 4.0
@@ -120,9 +120,9 @@
 	#define YAW_205_POS_P 1.0
 	#define YAW_205_POS_I 0.01
 	#define YAW_205_POS_D 0.1
-	#define PITCH_206_VEL_P 10 //10.0
+	#define PITCH_206_VEL_P 5//10 //10.0
 	#define PITCH_206_VEL_D 0.0
-	#define PITCH_206_POS_P 0.5 //1.0
+	#define PITCH_206_POS_P 0.8 //1.0
 	#define PITCH_206_POS_I 0.0
 	#define PITCH_206_POS_D 0 //0.5
 
