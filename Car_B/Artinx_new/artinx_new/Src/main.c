@@ -130,6 +130,8 @@ int main(void)
   /* USER CODE BEGIN 2 */
 	HAL_TIM_PWM_Start(&htim12, TIM_CHANNEL_1);
 	HAL_TIM_PWM_Start(&htim12, TIM_CHANNEL_2);
+	PWM1=1000;
+  PWM2=1000;
 	__HAL_UART_ENABLE_IT(&huart1, UART_IT_IDLE);
 	HAL_UART_Receive_IT(&huart3, uart3_rx_buff, 1);
   HAL_UART_Receive_IT(&huart6, uart6_rx_buff, 1);

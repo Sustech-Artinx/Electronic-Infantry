@@ -23,7 +23,7 @@ No   Version    Date     Revised By       Item       Description
 #include "test_can2.h"
 
 //��ʼ����̨�Ƕ�
-M6623 yaw = {YAW_LEFT,YAW_RIGHT,YAW_MID,0,0,0,0,YAW_MID,0,0};
+M6623 yaw = {YAW_RIGHT,YAW_LEFT,YAW_MID,0,0,0,0,YAW_MID,0,0};
 M6623 pitch = {PITCH_DOWN,PITCH_UP,PITCH_MID,0,0,0,0,PITCH_MID,0,0};
 double a=0;
 double b=0;
@@ -50,7 +50,7 @@ void Gimbal_Control(void)
 	pitch.velocity_output = Velocity_Control_206(-imu_data.gy ,pitch.position_output);
 	//can1��������������д��can1��can2����Ҫ����
 	Cmd_ESC(yaw.velocity_output,pitch.velocity_output);
-  //Cmd_ESC(0,pitch.velocity_output);
+ //Cmd_ESC(0,pitch.velocity_output);
 	//Cmd_ESC(0,0);
 	//Cmd_ESC(yaw.velocity_output,0);
 	printf("%d--%d\n",pitch.thisAngle,yaw.thisAngle);
@@ -70,7 +70,7 @@ void Trigger_Control(int16_t x, int16_t y, uint16_t ch3)
 				if (yaw.targetAngle > yaw.maxAngle){yaw.targetAngle=yaw.maxAngle;}
 				if (y>3) {pitch.targetAngle += -3;}
         if (y<-3) {pitch.targetAngle += 3;}
-				pitch.targetAngle += (float)((float)(ch3-1024)/100);
+				pitch.targetAngle -= (float)((float)(ch3-1024)/100);
 				delay_us(500);
 				if (pitch.targetAngle < pitch.minAngle){pitch.targetAngle=pitch.minAngle;}
 				if (pitch.targetAngle > pitch.maxAngle){pitch.targetAngle=pitch.maxAngle;}

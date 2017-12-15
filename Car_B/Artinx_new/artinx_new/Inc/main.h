@@ -108,11 +108,11 @@
 #ifdef CAR_A
 	#define RM3510
 
-	#define YAW_LEFT 5450
-	#define YAW_RIGHT	5887
-	#define YAW_MID 2100//3000//2600//2500//2200
-	#define PITCH_UP 6250//4700//4900//1100 //对应向下 
-	#define PITCH_DOWN  3750//3450//3650//-350 //对应向上
+	#define YAW_LEFT 6500
+	#define YAW_RIGHT	800
+	#define YAW_MID 3450  //3000//2600//2500//2200
+	#define PITCH_UP 5500//4700//4900//1100 //对应向下 
+	#define PITCH_DOWN  4000//3450//3650//-350 //对应向上
 	#define PITCH_MID 5000//3100//3400//200
 	//云台PID
 	#define YAW_205_VEL_P 2.0
