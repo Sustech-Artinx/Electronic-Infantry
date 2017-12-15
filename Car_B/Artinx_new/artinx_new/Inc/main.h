@@ -59,7 +59,7 @@
 #define maxs(a,b) (a>b? a:b)
 //定义车号，主要对应电机和云台
 //#define CAR_A
-#define CAR_B
+#define CAR_A
 //定义自动车
 #define AUTO_TRACK
 //CAR1 RM35-ROBOMODULE_NEW
@@ -106,30 +106,28 @@
 #endif
 
 #ifdef CAR_A
-	//定义底盘
 	#define RM3510
 
-	//云台角度
-	#define YAW_LEFT 240//545
-	#define YAW_RIGHT	2000//5887
-	#define YAW_MID 1050//3250
-	#define PITCH_UP 3500//1100
-	#define PITCH_DOWN 2650//-350
-	#define PITCH_MID 2900//200
+	#define YAW_LEFT 5450
+	#define YAW_RIGHT	5887
+	#define YAW_MID 2100//3000//2600//2500//2200
+	#define PITCH_UP 6250//4700//4900//1100 //对应向下 
+	#define PITCH_DOWN  3750//3450//3650//-350 //对应向上
+	#define PITCH_MID 5000//3100//3400//200
 	//云台PID
-	#define YAW_205_VEL_P 8.0
+	#define YAW_205_VEL_P 2.0
 	#define YAW_205_VEL_D 0.0
-	#define YAW_205_POS_P 2.0
+	#define YAW_205_POS_P 1.0
 	#define YAW_205_POS_I 0.01
 	#define YAW_205_POS_D 0.1
-	#define PITCH_206_VEL_P 10.0
+	#define PITCH_206_VEL_P 5//10 //10.0
 	#define PITCH_206_VEL_D 0.0
-	#define PITCH_206_POS_P 1.0
+	#define PITCH_206_POS_P 0.8 //1.0
 	#define PITCH_206_POS_I 0.0
-	#define PITCH_206_POS_D 0.5
+	#define PITCH_206_POS_D 0 //0.5
 
-	//定义RM3510的pid
-	#define ESC_820R_VEL_P 10.0//10.0
+	//底盘RM3510的pid
+	#define ESC_820R_VEL_P 8.0//10.0
 	#define ESC_820R_VEL_I 0.0
 	#define ESC_820R_VEL_D 0.5//0.5
 	#define ESC_820R_POS_P 10.0//10.0
@@ -138,6 +136,7 @@
 
 	#define SHOOT_SPEED  13   //0-10000
 #endif
+
 
 #ifdef CAR_B
 	//�������̵���

@@ -115,7 +115,7 @@
 	#define PITCH_DOWN  3750//3450//3650//-350 //对应向上
 	#define PITCH_MID 5000//3100//3400//200
 	//云台PID
-	#define YAW_205_VEL_P 4.0
+	#define YAW_205_VEL_P 2.0
 	#define YAW_205_VEL_D 0.0
 	#define YAW_205_POS_P 1.0
 	#define YAW_205_POS_I 0.01

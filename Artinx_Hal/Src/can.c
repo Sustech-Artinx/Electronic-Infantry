@@ -67,6 +67,7 @@ void MX_CAN1_Init(void)
 
 }
 /* CAN2 init function */
+
 void MX_CAN2_Init(void)
 {
 
@@ -110,12 +111,12 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* canHandle)
     PD0     ------> CAN1_RX
     PD1     ------> CAN1_TX 
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1;
+    GPIO_InitStruct.Pin = GPIO_PIN_13|GPIO_PIN_12;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
     GPIO_InitStruct.Alternate = GPIO_AF9_CAN1;
-    HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
     /* Peripheral interrupt init */
     HAL_NVIC_SetPriority(CAN1_TX_IRQn, 2, 1);

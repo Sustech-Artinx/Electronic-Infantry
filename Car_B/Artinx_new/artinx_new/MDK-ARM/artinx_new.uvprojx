@@ -540,6 +540,16 @@
               <FileType>1</FileType>
               <FilePath>..\Src\stm32f4xx_it.c</FilePath>
             </File>
+            <File>
+              <FileName>communication.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\communication.c</FilePath>
+            </File>
+            <File>
+              <FileName>uart_dma_queue.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\uart_dma_queue.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
