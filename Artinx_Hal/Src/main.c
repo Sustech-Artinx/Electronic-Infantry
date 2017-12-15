@@ -79,7 +79,7 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN 0 */
 
-//é‡æ–°å®šå‘printf()å‡½æ•°å¯¹åº”çš„ä¸²å£
+//ÖØÐÂ¶¨Ïòprintf()º¯Êý¶ÔÓ¦µÄ´®¿Ú
 #ifdef __GNUC__
 #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
 #else
@@ -166,7 +166,7 @@ int main(void)
 	//printf("main-%d --",yaw.thisAngle);
 	//printf("-%d \n",pitch.thisAngle);
 	HAL_UART_Receive_DMA(&huart1,dbus_buf,DBUS_BUF_SIZE);
-					if(DBUS_Det(dbus))//rcå¼€å¯åˆ¤æ–­
+					if(DBUS_Det(dbus))//rc¿ªÆôÅÐ¶Ï
 			{
 				if(dbus.mouse.x>3){
 				dbus.rc.ch2=dbus.rc.ch2+20;
