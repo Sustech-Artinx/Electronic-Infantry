@@ -46,9 +46,9 @@
 #include "chassis_control.h"
 int PWMPeriod =20000;
 int PWMLOSS=2000;
-//PWM1 = 1000;//1¡¢2Ä¦²ÁÂÖµç»ú
+//PWM1 = 1000;//1ã€ 2æ‘©æ“¦è½®ç”µæœº
 //PWM2 = 1000;
-//PWM3= 0;//²¦µ¯µç»ú
+//PWM3= 0;//æ‹¨å¼¹ç”µæœº
 /* USER CODE END 0 */
 
 TIM_HandleTypeDef htim2;
@@ -668,13 +668,13 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* tim_baseHandle)
 } 
 
 /* USER CODE BEGIN 1 */
-void ShootMotorSpeedSet(int32_t MotorSpeed)//²¦µ¯µç»úÉèÖÃ
+void ShootMotorSpeedSet(int32_t MotorSpeed)//æ‹¨å¼¹ç”µæœºè®¾ç½®
 {		
-	if(MotorSpeed > PWMPeriod-PWMLOSS)    MotorSpeed =   PWMPeriod-PWMLOSS ;//ÉÏÏÞ CCRµÄÖµ±ØÐëÐ¡ÓÚ»òµÈÓÚARRµÄÖµ
+	if(MotorSpeed > PWMPeriod-PWMLOSS)    MotorSpeed =   PWMPeriod-PWMLOSS ;//ä¸Šé™ CRRçš„å€¼å¿…é¡»å°äºŽæˆ–ç­‰äºŽARRçš„å€¼
 	PWM3 = MotorSpeed;
 }
 
-//¶¨Ê±Æ÷²Ù×÷
+//å®šæ—¶å™¨æ“ä½œ
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
     if (htim->Instance == htim3.Instance)
