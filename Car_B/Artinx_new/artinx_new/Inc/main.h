@@ -59,7 +59,7 @@
 #define maxs(a,b) (a>b? a:b)
 //定义车号，主要对应电机和云台
 //#define CAR_A
-#define CAR_B
+#define CAR_A
 //定义自动车
 #define AUTO_TRACK
 //CAR1 RM35-ROBOMODULE_NEW
@@ -235,7 +235,8 @@
 #define PWM3  TIM2->CCR1
 
 /* USER CODE END Private defines */
-
+#define USART_REC_LEN 50
+#define RXBUFFERSIZE   1 //缓存大小
 /**
   * @}
   */

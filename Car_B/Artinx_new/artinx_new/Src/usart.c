@@ -37,7 +37,8 @@
 
 #include "gpio.h"
 #include "dma.h"
-
+#include "string.h"
+#include "main.h"
 /* USER CODE BEGIN 0 */
 
 /* USER CODE END 0 */
@@ -49,6 +50,9 @@ UART_HandleTypeDef huart6;
 DMA_HandleTypeDef hdma_usart1_rx;
 
 /* USART1 init function */
+
+uint8_t USART_RX_BUF[USART_REC_LEN];//????,??USART_REC_LEN???.
+uint8_t aRxBuffer[RXBUFFERSIZE];   //HAL??????????
 
 void MX_USART1_UART_Init(void)
 {
@@ -349,8 +353,32 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
   }
 } 
 
-/* USER CODE BEGIN 1 */
 
+
+/* USER CODE BEGIN 1 */
+void USART6_IRQHandler(void)
+{
+  /* USER CODE BEGIN USART6_IRQn 0 */
+
+  /* USER CODE END USART6_IRQn 0 */
+  //HAL_UART_IRQHandler(&huart6);
+  /* USER CODE BEGIN USART6_IRQn 1 */
+	uint32_t temp;
+	uint8_t RX_LEN;
+	
+	if((__HAL_UART_GET_FLAG(&huart6,UART_FLAG_IDLE)!=RESET))  //??????(?????????0x0d 0x0a??)
+	{
+        __HAL_UART_CLEAR_IDLEFLAG(&huart6);  
+        HAL_UART_DMAStop(&huart6);  
+        temp = huart6.hdmarx->Instance->NDTR;  
+        RX_LEN =  USART_REC_LEN - temp;//RX_LEN?????,?????
+        HAL_UART_Receive_DMA(&huart6,USART_RX_BUF,USART_REC_LEN);  
+	}
+	
+	printf("get,%s",USART_RX_BUF);
+	memset(USART_RX_BUF,0,USART_REC_LEN);//?????????USART_RX_BUF,?????????
+  /* USER CODE END USART6_IRQn 1 */
+}
 /* USER CODE END 1 */
 
 /**

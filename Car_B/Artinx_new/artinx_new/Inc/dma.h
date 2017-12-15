@@ -53,7 +53,6 @@ extern void Error_Handler(void);
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
-
 void MX_DMA_Init(void);
 
 /* USER CODE BEGIN Prototypes */

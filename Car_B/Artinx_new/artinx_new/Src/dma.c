@@ -43,12 +43,14 @@
 /*----------------------------------------------------------------------------*/
 
 /* USER CODE BEGIN 1 */
-
+DMA_HandleTypeDef  UART6TxDMA_Handler;      //DMA¾ä±ú
+extern UART_HandleTypeDef huart6;
 /* USER CODE END 1 */
 
 /** 
   * Enable DMA controller clock
   */
+
 void MX_DMA_Init(void) 
 {
   /* DMA controller clock enable */
@@ -58,8 +60,31 @@ void MX_DMA_Init(void)
   /* DMA2_Stream2_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA2_Stream2_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(DMA2_Stream2_IRQn);
-
+	
+	
+	__HAL_RCC_DMA1_CLK_ENABLE();
+	
+	__HAL_LINKDMA(&huart6,hdmarx,UART6TxDMA_Handler);    //?DMA?USART1????(??DMA)
+	 /* USART1 DMA Init */
+    /* USART1_RX Init */
+    UART6TxDMA_Handler.Instance = DMA1_Stream5;										//DMA?
+    UART6TxDMA_Handler.Init.Channel = DMA_CHANNEL_4;								//dma??
+    UART6TxDMA_Handler.Init.Direction = DMA_PERIPH_TO_MEMORY;						//?????
+    UART6TxDMA_Handler.Init.PeriphInc = DMA_PINC_DISABLE;							//???????
+    UART6TxDMA_Handler.Init.MemInc = DMA_MINC_ENABLE;								//??????
+    UART6TxDMA_Handler.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;				//8?
+    UART6TxDMA_Handler.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;					//????8?
+    UART6TxDMA_Handler.Init.Mode = DMA_NORMAL;										//??????
+    UART6TxDMA_Handler.Init.Priority = DMA_PRIORITY_MEDIUM;							//?????
+    UART6TxDMA_Handler.Init.FIFOMode = DMA_FIFOMODE_DISABLE;						//fifo???
+    if (HAL_DMA_Init(&UART6TxDMA_Handler) != HAL_OK)
+    {
+      printf("dma1 error");
+			Error_Handler();
+    }
+	//HAL_UART_Receive_DMA(&UART6TxDMA_Handler,USART_RX_BUF,USART_REC_LEN);//??dma??
 }
+
 
 /* USER CODE BEGIN 2 */
 

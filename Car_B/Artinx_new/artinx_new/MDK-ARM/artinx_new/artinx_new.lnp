@@ -47,6 +47,6 @@
 "artinx_new\test_can1.o"
 "artinx_new\test_can2.o"
 --library_type=microlib --strict --scatter "artinx_new\artinx_new.sct"
---diag_suppress=L6329 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--diag_suppress=L6329 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list "artinx_new.map" -o artinx_new\artinx_new.axf

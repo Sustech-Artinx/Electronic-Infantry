@@ -65,7 +65,9 @@
 uint8_t recv_end_flag=0;
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
+#define RECV_BUF_SIZE 8200	//数据长度,最好等于sizeof(TEXT_TO_Recv)+2的整数倍.
 
+uint8_t RecvBuff[RECV_BUF_SIZE]; //数据缓冲区
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -125,7 +127,7 @@ int main(void)
   MX_USART3_UART_Init();
   MX_USART6_UART_Init();
   MX_I2C2_Init();
-
+	printf("hcan1 OK!\n");
   /* USER CODE BEGIN 2 */
 	HAL_TIM_PWM_Start(&htim12, TIM_CHANNEL_1);
 	HAL_TIM_PWM_Start(&htim12, TIM_CHANNEL_2);
@@ -166,17 +168,18 @@ int main(void)
 	//printf("main-%d --",yaw.thisAngle);
 	//printf("-%d \n",pitch.thisAngle);
 	HAL_UART_Receive_DMA(&huart1,dbus_buf,DBUS_BUF_SIZE);
+	HAL_UART_Receive_DMA(&huart6,RecvBuff,RECV_BUF_SIZE);
 					if(DBUS_Det(dbus))//rc开启判断
-			{
+			{/*
 				if(dbus.mouse.x>3){
 				dbus.rc.ch2=dbus.rc.ch2+20;
 				}
 				if(dbus.mouse.x<-3){
 				dbus.rc.ch2=dbus.rc.ch2-20;
-				}
+				}*/
 				move_control(dbus.rc.ch0, dbus.rc.ch1, dbus.rc.ch2, dbus.rc.s1, dbus.key.v,0);
-			  BLDC_control(dbus.rc.s2, dbus.mouse.r);
-			  Fire(dbus.rc.s2,dbus.mouse.l);				
+			  //BLDC_control(dbus.rc.s2, dbus.mouse.r);
+			  //Fire(dbus.rc.s2,dbus.mouse.l);				
 			}
 	}
   /* USER CODE END 3 */
