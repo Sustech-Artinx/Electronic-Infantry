@@ -59,6 +59,7 @@
 #include "test_usart.h"
 #include "test_can1.h"
 #include "test_can2.h"
+#include "communication.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -144,6 +145,10 @@ int main(void)
 	delay_ms(10);
 	Initialization();   	
 	delay_ms(2000);
+	
+	UART_RX_Queue_Init();
+	CommunicationInit();
+	extern UARTProtocol_HandleTypeDef hprotocol_uart6;
   /* USER CODE END 2 */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -177,6 +182,11 @@ int main(void)
 				move_control(dbus.rc.ch0, dbus.rc.ch1, dbus.rc.ch2, dbus.rc.s1, dbus.key.v,0);
 			  BLDC_control(dbus.rc.s2, dbus.mouse.r);
 			  Fire(dbus.rc.s2,dbus.mouse.l);				
+			}
+			UART_Protocol_Unpacker(&hprotocol_uart6);
+			if(hprotocol_uart6.isFrameReceived){
+				hprotocol_uart6.isFrameReceived = false;
+				HAL_UART_Transmit(&huart6, hprotocol_uart6.buffer, hprotocol_uart6.dataLen, 100);
 			}
 	}
   /* USER CODE END 3 */
