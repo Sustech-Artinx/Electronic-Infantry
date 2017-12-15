@@ -158,36 +158,43 @@ int main(void)
   /* USER CODE END WHILE */
   
   /* USER CODE BEGIN 3 */
-	if(recv_end_flag ==1)
-	{
-//		printf("%d ",dbus.rc.ch0);
-//		printf("%d ",dbus.rc.ch1);
-//		printf("%d ",dbus.rc.ch2);
-//  	printf("%d\n",dbus.rc.ch3);
-//		printf("%d ",dbus.rc.s1);
-//		printf("%d\r\n",dbus.rc.s2);
-//		recv_end_flag=0;
-	}
-	//printf("main-%d --",yaw.thisAngle);
-	//printf("-%d \n",pitch.thisAngle);
-	HAL_UART_Receive_DMA(&huart1,dbus_buf,DBUS_BUF_SIZE);
-					if(DBUS_Det(dbus))//rc¿ªÆôÅÐ¶Ï
-			{
-				if(dbus.mouse.x>3){
-				dbus.rc.ch2=dbus.rc.ch2+20;
-				}
-				if(dbus.mouse.x<-3){
-				dbus.rc.ch2=dbus.rc.ch2-20;
-				}
-				move_control(dbus.rc.ch0, dbus.rc.ch1, dbus.rc.ch2, dbus.rc.s1, dbus.key.v,0);
-			  BLDC_control(dbus.rc.s2, dbus.mouse.r);
-			  Fire(dbus.rc.s2,dbus.mouse.l);				
+		if(recv_end_flag ==1)
+		{
+	//		printf("%d ",dbus.rc.ch0);
+	//		printf("%d ",dbus.rc.ch1);
+	//		printf("%d ",dbus.rc.ch2);
+	//  	printf("%d\n",dbus.rc.ch3);
+	//		printf("%d ",dbus.rc.s1);
+	//		printf("%d\r\n",dbus.rc.s2);
+	//		recv_end_flag=0;
+		}
+		//printf("main-%d --",yaw.thisAngle);
+		//printf("-%d \n",pitch.thisAngle);
+		HAL_UART_Receive_DMA(&huart1,dbus_buf,DBUS_BUF_SIZE);
+		if(DBUS_Det(dbus))//rc¿ªÆôÅÐ¶Ï
+		{
+			if(dbus.mouse.x>3){
+			dbus.rc.ch2=dbus.rc.ch2+20;
 			}
-			UART_Protocol_Unpacker(&hprotocol_uart6);
-			if(hprotocol_uart6.isFrameReceived){
-				hprotocol_uart6.isFrameReceived = false;
-				HAL_UART_Transmit(&huart6, hprotocol_uart6.buffer, hprotocol_uart6.dataLen, 100);
+			if(dbus.mouse.x<-3){
+			dbus.rc.ch2=dbus.rc.ch2-20;
 			}
+			move_control(dbus.rc.ch0, dbus.rc.ch1, dbus.rc.ch2, dbus.rc.s1, dbus.key.v,0);
+			BLDC_control(dbus.rc.s2, dbus.mouse.r);
+			Fire(dbus.rc.s2,dbus.mouse.l);				
+		}
+		UART_Protocol_Unpacker(&hprotocol_uart6);
+		if(hprotocol_uart6.isFrameReceived){
+			hprotocol_uart6.isFrameReceived = false;
+			extern M6623 yaw;
+			extern M6623 pitch;
+			uint8_t *angleData = hprotocol_uart6.buffer;
+			yaw.targetAngle = angleData[0];
+			yaw.targetAngle |= angleData[1]<<8;
+			pitch.targetAngle = angleData[2];
+			pitch.targetAngle |= angleData[3]<<8;
+			//HAL_UART_Transmit(&huart6, hprotocol_uart6.buffer, hprotocol_uart6.dataLen, 100);
+		}
 	}
   /* USER CODE END 3 */
 
