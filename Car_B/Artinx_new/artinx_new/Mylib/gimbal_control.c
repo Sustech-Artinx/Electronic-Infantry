@@ -47,7 +47,7 @@ void Gimbal_Control(void)
 	//�ڻ�PID����
   //Pitch.velocity_output = Velocity_Control_206(-MPU6050_Real_Data.Gyro_Y ,Pitch.position_output);
 	//pitch.velocity_output = Velocity_Control_206(0 ,pitch.position_output);
-	pitch.velocity_output = Velocity_Control_206(imu_data.gy ,pitch.position_output);
+	pitch.velocity_output = Velocity_Control_206(-imu_data.gy ,pitch.position_output);
 	//can1��������������д��can1��can2����Ҫ����
 	Cmd_ESC(yaw.velocity_output,pitch.velocity_output);
   //Cmd_ESC(0,pitch.velocity_output);

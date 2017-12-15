@@ -120,7 +120,7 @@
 	#define YAW_205_POS_P 1.0
 	#define YAW_205_POS_I 0.01
 	#define YAW_205_POS_D 0.1
-	#define PITCH_206_VEL_P 5//10 //10.0
+	#define PITCH_206_VEL_P 4//5//10 //10.0
 	#define PITCH_206_VEL_D 0.0
 	#define PITCH_206_POS_P 0.8 //1.0
 	#define PITCH_206_POS_I 0.0
