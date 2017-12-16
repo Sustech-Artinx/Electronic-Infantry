@@ -30,6 +30,7 @@ void UART_Protocol_Unpacker(UARTProtocol_HandleTypeDef *handler){
 			case RECLEN1:{
 				handler->dataLen = (uint16_t)data;
 				handler->state.recState=RECLEN2;
+				handler->isFrameReceived = false;
 				break;
 			}
 			case RECLEN2:{

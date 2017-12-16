@@ -6,12 +6,12 @@
 
 typedef struct{
 	enum{
-		RECOP,		//head code
+		RECOP,		//head code, 0xFA
 		RECLEN1,	//low bits of data length
 		RECLEN2,	//hight bits of data length
 		RECSEL,		//data part
-		RECCHECK,	//check part
-		RECEND		//end code
+		RECCHECK,	//check part, CRC
+		RECEND		//end code, 0xFB
 	} recState;
 	uint16_t dataRecProgress; //receive progress of data part
 }UARTProtocol_StateTypeDef;
