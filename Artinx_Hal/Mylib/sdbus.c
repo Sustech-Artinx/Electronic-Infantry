@@ -2,10 +2,10 @@
 #include "dbus.h"
 #include "gimbal_control.h"
 
-int SDFlag=0;//Ä¬ÈÏÎªÊÖ¶¯
-int LastQKey=0;//ÉÏÒ»¸öQ
+int SDFlag=0;//é»˜è®¤ä¸ºæ‰‹åŠ¨
+int LastQKey=0;//ä¸Šä¸€ä¸ªQ
 int LastEKey=0;
-int BlueFlag=0;//Ä¬ÈÏÎªºìÉ«
+int BlueFlag=0;//é»˜è®¤ä¸ºçº¢è‰²
 
 void SDState_Set(uint16_t v)
 {
@@ -34,11 +34,11 @@ void SDState_Set(uint16_t v)
 
 void SD_TriggerControl(void)
 {
-			//PitchÖá
+			//Pitchè½´
 			pitch.targetAngle += ((double)sdbus.PitchAngle/360.)*8192; 
 			if (pitch.targetAngle < pitch.minAngle){pitch.targetAngle=pitch.minAngle;}
 			if (pitch.targetAngle > pitch.maxAngle){pitch.targetAngle=pitch.maxAngle;}		
-			//YawÖá
+			//Yawè½´
 			yaw.targetAngle += ((double)sdbus.YawAngle/360.)*8192;
 			if (yaw.targetAngle < yaw.minAngle){yaw.targetAngle=yaw.minAngle;}
 			if (yaw.targetAngle > yaw.maxAngle){yaw.targetAngle=yaw.maxAngle;}
@@ -46,7 +46,7 @@ void SD_TriggerControl(void)
 }
 
 SDBUS sdbus;
-void SDBUS_Enc(const SDBUS* sdbus,unsigned char* sdbuf)//sdbus±àÂë
+void SDBUS_Enc(const SDBUS* sdbus,unsigned char* sdbuf)//sdbusç¼–ç 
 {
     sdbuf[0] = (sdbus->PitchAngle > 0)+'0';
     sdbuf[1] =  abs(sdbus->PitchAngle)/10+'0';
@@ -56,7 +56,7 @@ void SDBUS_Enc(const SDBUS* sdbus,unsigned char* sdbuf)//sdbus±àÂë
 		sdbuf[5] = abs(sdbus->YawAngle)%10+'0';
 }
 
-void SDBUS_Dec(SDBUS* sdbus,const unsigned char* sdbuf)//sdbus½âÂë
+void SDBUS_Dec(SDBUS* sdbus,const unsigned char* sdbuf)//sdbusè§£ç 
 {
     sdbus->PitchAngle = (2*(sdbuf[0]-'0')-1)*((sdbuf[1]-'0')*10+(sdbuf[2]-'0'));
     sdbus->YawAngle= (2*(sdbuf[3]-'0')-1)*((sdbuf[4]-'0')*10+(sdbuf[5]-'0'));

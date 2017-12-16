@@ -1,9 +1,9 @@
-/*详情见main.h说明*/
+/*璇﹁main.h璇存槑*/
 #include "dbus.h"
 
 DBUS dbus;
 
-void DBUS_Enc(const DBUS* pdbus,unsigned char* pbuf)//dbus编码
+void DBUS_Enc(const DBUS* pdbus,unsigned char* pbuf)//dbus缂栫爜
 {  
     pbuf[0] = pdbus->rc.ch0&0xff;
     pbuf[1] = (pdbus->rc.ch1<<3) | (pdbus->rc.ch0>>8);
@@ -25,7 +25,7 @@ void DBUS_Enc(const DBUS* pdbus,unsigned char* pbuf)//dbus编码
     pbuf[17] = pdbus->res>>8;
 }
 
-void DBUS_Dec(DBUS* pdbus,uint8_t* pbuf)//dbus解码
+void DBUS_Dec(DBUS* pdbus,uint8_t* pbuf)//dbus瑙ｇ爜
 {  
     pdbus->rc.ch0 = (pbuf[0] | (pbuf[1] << 8)) & 0x07ff;          //!< Channel 0  
     pdbus->rc.ch1 = ((pbuf[1] >> 3) | (pbuf[2] << 5)) & 0x07ff;   //!< Channel 1         
@@ -43,7 +43,7 @@ void DBUS_Dec(DBUS* pdbus,uint8_t* pbuf)//dbus解码
     pdbus->res = pbuf[16] | (pbuf[17] << 8);                      //!< Reserve 
 
 }
-int DBUS_Det(DBUS dbus_detect)//仅用s1和s2的有无来判断是否有dbus数据传输
+int DBUS_Det(DBUS dbus_detect)//浠呯敤s1鍜宻2鐨勬湁鏃犳潵鍒ゆ柇鏄惁鏈塪bus鏁版嵁杈撳嚭
 {	
 	if(dbus_detect.rc.s1 != 0 && dbus_detect.rc.s2 != 0)
 	{ return 1;}

@@ -6,20 +6,20 @@
 
 typedef struct _M6623_
 {
-	int16_t minAngle;//×îĞ¡½Ç¶È
-	int16_t maxAngle;//×î´ó½Ç¶È
-	int16_t defualtAngle;//³õÊ¼½Ç¶È
+	int16_t minAngle;//æœ€å°è§’åº¦
+	int16_t maxAngle;//æœ€å¤§è§’åº¦
+	int16_t defualtAngle;//åˆå§‹è§’åº¦
 	
-	//´ÓÔÆÌ¨ÖĞ¶Áµ½µÄÊıÖµ
-	int16_t thisAngle_Raw;//Ô­ÉúµÄ·´À¡½Ç¶È
-	int16_t thisAngle;//´¦ÀíºóµÄ·´À¡½Ç¶È
-	int16_t thisCurrent;//·´À¡µçÁ÷
-	int16_t targetCurrent;//Ä¿±êµçÁ÷
+	//ä»äº‘å°ä¸­è¯»åˆ°çš„æ•°å€¼
+	int16_t thisAngle_Raw;//åŸç”Ÿçš„åé¦ˆè§’åº¦
+	int16_t thisAngle;//å¤„ç†åçš„åé¦ˆè§’åº¦
+	int16_t thisCurrent;//åé¦ˆç”µæµ
+	int16_t targetCurrent;//ç›®æ ‡ç”µæµ
 	
-	int16_t targetAngle;//Ä¿±ê½Ç¶È
+	int16_t targetAngle;//ç›®æ ‡è§’åº¦
 	
-	float position_output;//Î»ÖÃ»·Êä³ö£¬Î»ÖÃ»·ÊäÈë
-	float velocity_output;//ËÙ¶È»·Êä³ö£¬µçÁ÷»·ÊäÈë
+	float position_output;//ä½ç½®ç¯è¾“å‡ºï¼Œä½ç½®ç¯è¾“å…¥
+	float velocity_output;//é€Ÿåº¦ç¯è¾“å‡ºï¼Œç”µæµç¯è¾“å…¥
 
 }M6623;
 

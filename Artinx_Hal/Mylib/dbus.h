@@ -68,7 +68,7 @@ typedef struct
     
 }DBUS;
 
-extern DBUS dbus;//¹©ÆäËûÎÄ¼şÊ¹ÓÃdbusÊı¾İ¡£Ô­¶¨ÒåÔÚusart1Àï¡£
+extern DBUS dbus;//ä¾›å…¶ä»–æ–‡ä»¶ä½¿ç”¨dbusæ•°æ®ã€‚åŸå®šä¹‰åœ¨usart1é‡Œã€‚
 
 void DBUS_Enc(const DBUS* pdbus,unsigned char* pbuf);
 void DBUS_Dec(DBUS* pdbus,uint8_t* pbuf);

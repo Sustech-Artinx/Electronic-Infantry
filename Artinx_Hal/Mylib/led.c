@@ -1,2 +1,2 @@
-/*详情见main.h说明*/
+/*璇︽儏瑙乵ain.h璇存槑*/
 #include "led.h"

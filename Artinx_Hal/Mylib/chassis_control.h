@@ -18,16 +18,16 @@ extern  RM35_DATA RM35_4;
 
 typedef struct _RM3510_DATA_
 {
-	//´Óµçµ÷·´À¡¶Áµ½µÄÊıÖµ	
-	int16_t thisPosition;//´¦ÀíºóµÄ·´À¡½Ç¶È
-	int16_t thisVelocity;//·´À¡µçÁ÷
-	//Ä¿±êÉè¶¨ÊıÖµ
-	int16_t targetPosition;//Ä¿±ê½Ç¶È
-	int16_t targetVelocity;//Ä¿±êËÙ¶È
+	//ä»ç”µè°ƒåé¦ˆè¯»åˆ°çš„æ•°æ®
+	int16_t thisPosition;//å¤„ç†åçš„åé¦ˆè§’åº¦
+	int16_t thisVelocity;//åé¦ˆç”µæµ
+	//ç›®æ ‡è®¾å®šæ•°æ®
+	int16_t targetPosition;//ç›®æ ‡è§’åº¦
+	int16_t targetVelocity;//ç›®æ ‡é€Ÿåº¦
 	//PID
-	float position_output;//Î»ÖÃ»·Êä³ö£¬Î»ÖÃ»·ÊäÈë
-	float velocity_output;//ËÙ¶È»·Êä³ö£¬µçÁ÷»·ÊäÈë
-	//±àºÅÖµ£¬Ä¿Ç°ÎŞÓÃ
+	float position_output;//ä½ç½®ç¯è¾“å‡ºï¼Œä½ç½®ç¯è¾“å…¥
+	float velocity_output;//é€Ÿåº¦ç¯è¾“å‡ºï¼Œç”µæµç¯è¾“å…¥
+	//ç¼–å·å€¼ï¼Œ ç›®å‰æ— ç”¨
 	uint8_t number;
 	
 }RM3510_DATA;
@@ -37,7 +37,7 @@ extern RM3510_DATA RM3510_2;
 extern RM3510_DATA RM3510_3;
 extern RM3510_DATA RM3510_4;
 
-//3510ÓÃ 
+//3510ç”¨
 void ChassisMotor_Velocity_Control(float vel1,float vel2,float vel3,float vel4);
 void ChassisMotor_Position_Control(float pos1,float pos2,float pos3,float pos4);
 
