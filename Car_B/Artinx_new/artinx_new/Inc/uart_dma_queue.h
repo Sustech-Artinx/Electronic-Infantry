@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#include "stm32f4xx_hal.h"
 
 #define UART_RX_QUEUE_SIZE 100
 
@@ -16,6 +17,6 @@ typedef struct __UART_RX_Queue{
 	bool (*isFull)(struct __UART_RX_Queue *self);
 }UART_RX_Queue;
 
-extern void UART_RX_Queue_Init(void);
+void UART_DMA_RX_Queue_Init(UART_RX_Queue *queue, UART_HandleTypeDef *huart, DMA_HandleTypeDef *hdma_usart_rx);
 
 #endif

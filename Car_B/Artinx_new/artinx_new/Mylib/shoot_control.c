@@ -63,7 +63,7 @@ void Fire(uint8_t s2, uint8_t press_l)
 	}
   if (shoot_flag == 1)
 	{ 
-		shoot_speed_new=1000;
+		shoot_speed_new=-1000;
 		
 	}
 	else if(shoot_flag == 0)

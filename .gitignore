@@ -17,6 +17,7 @@
 *.m51
 *.m66
 *.scr  	# define exception below if needed
+*.sct
 
 # Object and HEX files
 *.axf

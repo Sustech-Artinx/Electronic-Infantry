@@ -3,18 +3,8 @@
 
 //#define CRC_Divider  ？  //CRC校验除数
 
-#define UART6_RECEIVEBUF_SIZE 1024
-
-UARTProtocol_HandleTypeDef hprotocol_uart6;
-static uint8_t uart6_receive_buffer[UART6_RECEIVEBUF_SIZE];
-
-void CommunicationInit(void){
-	extern UART_RX_Queue USART6_RX;
-	hprotocol_uart6.buffer = uart6_receive_buffer;
-	hprotocol_uart6.bufferSize = UART6_RECEIVEBUF_SIZE;
-	hprotocol_uart6.source = &USART6_RX;
-	hprotocol_uart6.state.recState = RECOP;
-	hprotocol_uart6.isFrameReceived = false;
+void Communication_Init(void){
+	;
 }
 
 void UART_Protocol_Unpacker(UARTProtocol_HandleTypeDef *handler){

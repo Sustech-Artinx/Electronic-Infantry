@@ -66,7 +66,8 @@
 uint8_t recv_end_flag=0;
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
-
+UARTProtocol_HandleTypeDef hprotocol_uart6;
+UARTProtocol_HandleTypeDef hprotocol_uart3;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -75,7 +76,8 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
-
+static void UARTProtocol_UART6_Init(void);
+static void UARTProtocol_UART3_Init(void);
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
@@ -148,9 +150,7 @@ int main(void)
 	Initialization();   	
 	delay_ms(2000);
 	
-	UART_RX_Queue_Init();
-	CommunicationInit();
-	extern UARTProtocol_HandleTypeDef hprotocol_uart6;
+	UARTProtocol_UART3_Init();
   /* USER CODE END 2 */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -185,17 +185,17 @@ int main(void)
 			BLDC_control(dbus.rc.s2, dbus.mouse.r);
 			Fire(dbus.rc.s2,dbus.mouse.l);				
 		}
-		UART_Protocol_Unpacker(&hprotocol_uart6);
-		if(hprotocol_uart6.isFrameReceived){
-			hprotocol_uart6.isFrameReceived = false;
+		UART_Protocol_Unpacker(&hprotocol_uart3);
+		if(hprotocol_uart3.isFrameReceived){
+			hprotocol_uart3.isFrameReceived = false;
 			extern M6623 yaw;
 			extern M6623 pitch;
-			uint8_t *angleData = hprotocol_uart6.buffer;
+			uint8_t *angleData = hprotocol_uart3.buffer;
 			yaw.targetAngle = angleData[0];
 			yaw.targetAngle |= angleData[1]<<8;
 			pitch.targetAngle = angleData[2];
 			pitch.targetAngle |= angleData[3]<<8;
-			//HAL_UART_Transmit(&huart6, hprotocol_uart6.buffer, hprotocol_uart6.dataLen, 100);
+			//HAL_UART_Transmit(&huart6, hprotocol_uart3.buffer, hprotocol_uart3.dataLen, 100);
 		}
 	}
   /* USER CODE END 3 */
@@ -258,7 +258,29 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+static void UARTProtocol_UART6_Init(void){
+	static UART_RX_Queue USART6_RX;
+	UART_DMA_RX_Queue_Init(&USART6_RX, &huart6, &hdma_usart6_rx);
+	const uint16_t buffer_size = 1024;
+	static uint8_t uart6_receive_buffer[buffer_size];
+	hprotocol_uart6.buffer = uart6_receive_buffer;
+	hprotocol_uart6.bufferSize = buffer_size;
+	hprotocol_uart6.source = &USART6_RX;
+	hprotocol_uart6.state.recState = RECOP;
+	hprotocol_uart6.isFrameReceived = false;
+}
 
+static void UARTProtocol_UART3_Init(void){
+	static UART_RX_Queue USART3_RX;
+	UART_DMA_RX_Queue_Init(&USART3_RX, &huart3, &hdma_usart3_rx);
+	const uint16_t buffer_size = 1024;
+	static uint8_t uart3_receive_buffer[buffer_size];
+	hprotocol_uart3.buffer = uart3_receive_buffer;
+	hprotocol_uart3.bufferSize = buffer_size;
+	hprotocol_uart3.source = &USART3_RX;
+	hprotocol_uart3.state.recState = RECOP;
+	hprotocol_uart3.isFrameReceived = false;
+}
 /* USER CODE END 4 */
 
 /**
