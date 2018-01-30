@@ -89,27 +89,27 @@ void HAL_CAN_RxCpltCallback(CAN_HandleTypeDef* hcan)
   {		
 		case 0x205:
             {
-                             //»ñµÃÔÆÌ¨µç»ú0x205µÄÂëÅÌÖµ 
-							yaw.thisAngle_Raw = (hcan->pRxMsg->Data[0]<<8)|hcan->pRxMsg->Data[1];     //»úĞµ½Ç¶È
-							yaw.thisCurrent = (hcan->pRxMsg->Data[2]<<8)|hcan->pRxMsg->Data[3];      //Êµ¼ÊµçÁ÷Öµ
-							yaw.targetCurrent = (hcan->pRxMsg->Data[4]<<8)|hcan->pRxMsg->Data[5];     //¸ø¶¨µÄµçÁ÷Öµ
+                             //è·å¾—äº‘å°ç”µæœº0x205çš„ç ç›˜å€¼
+							yaw.thisAngle_Raw = (hcan->pRxMsg->Data[0]<<8)|hcan->pRxMsg->Data[1];     //æœºæ¢°è§’åº¦
+							yaw.thisCurrent = (hcan->pRxMsg->Data[2]<<8)|hcan->pRxMsg->Data[3];      //å®é™…ç”µæµå€¼
+							yaw.targetCurrent = (hcan->pRxMsg->Data[4]<<8)|hcan->pRxMsg->Data[5];     //ç»™å®šçš„ç”µæµå€¼
 							yaw.thisAngle=yaw.thisAngle_Raw;
 							if((yaw.thisAngle & 0x1000) == 0x1000)
 							{
-								yaw.thisAngle = yaw.thisAngle_Raw - 8191 ;   //½«205µÄÖµ±äÎªÁ¬ĞøµÄÕı¸ºÊı
+								yaw.thisAngle = yaw.thisAngle_Raw - 8191 ;   //å°†205çš„å€¼å˜ä¸ºè¿ç»­çš„æ­£è´Ÿæ•°
 							}  		
 							yaw.thisAngle = 3000-yaw.thisAngle;
 						}break;	
 		case 0x206:
             {
-             //»ñµÃÔÆÌ¨µç»ú0x206µÄÂëÅÌÖµ  
-							pitch.thisAngle_Raw = (hcan->pRxMsg->Data[0]<<8)|hcan->pRxMsg->Data[1];     //»úĞµ½Ç¶È
-							pitch.thisCurrent = (hcan->pRxMsg->Data[2]<<8)|hcan->pRxMsg->Data[3];      //Êµ¼ÊµçÁ÷Öµ
-							pitch.targetCurrent = (hcan->pRxMsg->Data[4]<<8)|hcan->pRxMsg->Data[5];     //¸ø¶¨µÄµçÁ÷Öµ
+             //è·å¾—äº‘å°ç”µæœº0x206çš„ç ç›˜å€¼
+							pitch.thisAngle_Raw = (hcan->pRxMsg->Data[0]<<8)|hcan->pRxMsg->Data[1];     //æœºæ¢°è§’åº¦
+							pitch.thisCurrent = (hcan->pRxMsg->Data[2]<<8)|hcan->pRxMsg->Data[3];      //å®é™…ç”µæµå€¼
+							pitch.targetCurrent = (hcan->pRxMsg->Data[4]<<8)|hcan->pRxMsg->Data[5];     //ç»™å®šçš„ç”µæµå€¼
 							pitch.thisAngle=pitch.thisAngle_Raw;
 							if((pitch.thisAngle & 0x1000) == 0x1000)
 							{
-								pitch.thisAngle = pitch.thisAngle_Raw - 8191;   //½«205µÄÖµ±äÎªÁ¬ĞøµÄÕı¸ºÊı
+								pitch.thisAngle = pitch.thisAngle_Raw - 8191;   //å°†205çš„å€¼å˜ä¸ºè¿ç»­çš„æ­£è´Ÿæ•°
 							}  
 							pitch.thisAngle = 3000-pitch.thisAngle;
 						}break;	
@@ -139,9 +139,9 @@ void Cmd_ESC_820R(int16_t current_201,int16_t current_202,int16_t current_203,in
 }
 
 
-//RM35µç»ú¡ª¡ªROBOMODULE·¢ËÍº¯Êı
+//RM35ç”µæœºâ€”â€”â€”â€”ROBOMODULEå‘é€å‡½æ•°
 /****************************************************************************************
-                                       ¸´Î»Ö¸Áî
+                                          å¤ä½æŒ‡ä»¤
 *****************************************************************************************/
 void CAN_RoboModule_DRV_Reset(unsigned char Group,unsigned char Number)
 {   CAN_HandleTypeDef* hcan=&hcan1;
@@ -184,7 +184,7 @@ void CAN_RoboModule_DRV_Reset(unsigned char Group,unsigned char Number)
         default: return;
     }
     
-    hcan->pTxMsg->StdId = can_id;      //Ö¡IDÎª´«Èë²ÎÊıµÄCAN_ID
+    hcan->pTxMsg->StdId = can_id;      //å¸§IDä¸ºä¼ å…¥å‚æ•°çš„CAN_ID
 		
     hcan->pTxMsg->Data[0] = 0x55;
     hcan->pTxMsg->Data[1] = 0x55;
@@ -200,8 +200,8 @@ void CAN_RoboModule_DRV_Reset(unsigned char Group,unsigned char Number)
 }
 
 /****************************************************************************************
-                                     Ä£Ê½Ñ¡ÔñÖ¸Áî
-modeµÄÈ¡Öµ·¶Î§ÈçÏÂ£º
+                                     æ¨¡å¼é€‰æ‹©æŒ‡ä»¤
+modeçš„å–å€¼èŒƒå›´å¦‚ä¸‹
 PWM_MODE
 PWM_CURRENT_MODE
 PWM_VELOCITY_MODE
@@ -215,9 +215,9 @@ void CAN_RoboModule_DRV_Mode_Choice(unsigned char Group,unsigned char Number,uns
 {   CAN_HandleTypeDef* hcan=&hcan1;
     unsigned short can_id = 0x001;
     
-    hcan->pTxMsg->IDE = CAN_ID_STD;    //±ê×¼Ö¡
-    hcan->pTxMsg->RTR = CAN_RTR_DATA;  //Êı¾İÖ¡
-    hcan->pTxMsg->DLC = 0x08;          //Ö¡³¤¶ÈÎª8
+    hcan->pTxMsg->IDE = CAN_ID_STD;    //æ ‡å‡†å¸§
+    hcan->pTxMsg->RTR = CAN_RTR_DATA;  //æ•°æ®å¸§
+	  hcan->pTxMsg->DLC = 0x08;          //å¸§é•¿åº¦ä¸º8
     
     switch(Group)
     {
@@ -253,7 +253,7 @@ void CAN_RoboModule_DRV_Mode_Choice(unsigned char Group,unsigned char Number,uns
         default: return;
     }
     
-    hcan->pTxMsg->StdId = can_id;      //Ö¡IDÎª´«Èë²ÎÊıµÄCAN_ID
+    hcan->pTxMsg->StdId = can_id;      //å¸§IDä¸ºä¼ å…¥å‚æ•°çš„CAN_ID
     
     hcan->pTxMsg->Data[0] = Mode;
     hcan->pTxMsg->Data[1] = 0x55;
@@ -269,8 +269,8 @@ void CAN_RoboModule_DRV_Mode_Choice(unsigned char Group,unsigned char Number,uns
 }
 
 /****************************************************************************************
-                                  PWMÄ£Ê½ÏÂµÄÊı¾İÖ¸Áî
-temp_pwmµÄÈ¡Öµ·¶Î§ÈçÏÂ£º
+                                  PWMæ¨¡å¼ä¸‹çš„æ•°æ®æŒ‡ä»¤
+temp_pwmå–å€¼èŒƒå›´å¦‚ä¸‹
 -5000 ~ +5000
 *****************************************************************************************/
 void CAN_RoboModule_DRV_PWM_Mode(unsigned char Group,unsigned char Number,short Temp_PWM)
@@ -278,9 +278,9 @@ void CAN_RoboModule_DRV_PWM_Mode(unsigned char Group,unsigned char Number,short 
     unsigned short can_id = 0x002;
     CAN_HandleTypeDef* hcan=&hcan1;
     
-    hcan->pTxMsg->IDE = CAN_ID_STD;    //±ê×¼Ö¡
-    hcan->pTxMsg->RTR = CAN_RTR_DATA;  //Êı¾İÖ¡
-    hcan->pTxMsg->DLC = 0x08;          //Ö¡³¤¶ÈÎª8
+    hcan->pTxMsg->IDE = CAN_ID_STD;    //æ ‡å‡†å¸§
+    hcan->pTxMsg->RTR = CAN_RTR_DATA;  //æ•°æ®å¸§
+    hcan->pTxMsg->DLC = 0x08;          //å¸§é•¿åº¦ä¸º8
     
     switch(Group)
     {
@@ -316,7 +316,7 @@ void CAN_RoboModule_DRV_PWM_Mode(unsigned char Group,unsigned char Number,short 
         default: return;
     }
     
-    hcan->pTxMsg->StdId = can_id;      //Ö¡IDÎª´«Èë²ÎÊıµÄCAN_ID
+    hcan->pTxMsg->StdId = can_id;      //å¸§IDä¸ºä¼ å…¥å‚æ•°çš„CAN_ID
 
     if(Temp_PWM > 5000)
     {
@@ -343,11 +343,11 @@ void CAN_RoboModule_DRV_PWM_Mode(unsigned char Group,unsigned char Number,short 
 
 
 /****************************************************************************************
-                                  PWMµçÁ÷Ä£Ê½ÏÂµÄÊı¾İÖ¸Áî
-temp_pwmµÄÈ¡Öµ·¶Î§ÈçÏÂ£º
+                                  PWMç”µæµæ¨¡å¼ä¸‹çš„æ•°æ®æŒ‡ä»¤
+temp_pwmçš„å–å€¼èŒƒå›´å¦‚ä¸‹ï¼š
 0 ~ +5000
 
-temp_currentµÄÈ¡Öµ·¶Î§ÈçÏÂ£º
+temp_currentçš„å–å€¼èŒƒå›´å¦‚ä¸‹ï¼š
 -1600 ~ +1600
 *****************************************************************************************/
 void CAN_RoboModule_DRV_PWM_Current_Mode(unsigned char Group,unsigned char Number,short Temp_PWM,short Temp_Current)
@@ -355,9 +355,9 @@ void CAN_RoboModule_DRV_PWM_Current_Mode(unsigned char Group,unsigned char Numbe
     unsigned short can_id = 0x003;
     CAN_HandleTypeDef* hcan=&hcan1;
     
-    hcan->pTxMsg->IDE = CAN_ID_STD;    //±ê×¼Ö¡
-    hcan->pTxMsg->RTR = CAN_RTR_DATA;  //Êı¾İÖ¡
-    hcan->pTxMsg->DLC = 0x08;          //Ö¡³¤¶ÈÎª8
+    hcan->pTxMsg->IDE = CAN_ID_STD;    //æ ‡å‡†å¸§
+    hcan->pTxMsg->RTR = CAN_RTR_DATA;  //æ•°æ®å¸§
+    hcan->pTxMsg->DLC = 0x08;          //å¸§é•¿åº¦ä¸º8
     
     switch(Group)
     {
@@ -393,8 +393,7 @@ void CAN_RoboModule_DRV_PWM_Current_Mode(unsigned char Group,unsigned char Numbe
         default: return;
     }
     
-    hcan->pTxMsg->StdId = can_id;      //Ö¡IDÎª´«Èë²ÎÊıµÄCAN_ID
-
+    hcan->pTxMsg->StdId = can_id;      //å¸§IDä¸ºä¼ å…¥å‚æ•°çš„CAN_ID
     if(Temp_PWM > 5000)
     {
         Temp_PWM = 5000;
@@ -433,11 +432,11 @@ void CAN_RoboModule_DRV_PWM_Current_Mode(unsigned char Group,unsigned char Numbe
 }
 
 /****************************************************************************************
-                                  PWMËÙ¶ÈÄ£Ê½ÏÂµÄÊı¾İÖ¸Áî
-temp_pwmµÄÈ¡Öµ·¶Î§ÈçÏÂ£º
+                                  PWMé€Ÿåº¦æ¨¡å¼ä¸‹çš„æ•°æ®æŒ‡ä»¤
+temp_pwmçš„å–å€¼èŒƒå›´å¦‚ä¸‹ï¼š
 0 ~ +5000
 
-temp_velocityµÄÈ¡Öµ·¶Î§ÈçÏÂ£º
+temp_velocityçš„å–å€¼èŒƒå›´å¦‚ä¸‹ï¼š
 -32768 ~ +32767
 *****************************************************************************************/
 void CAN_RoboModule_DRV_PWM_Velocity_Mode(unsigned char Group,unsigned char Number,short Temp_PWM,short Temp_Velocity)
@@ -445,9 +444,9 @@ void CAN_RoboModule_DRV_PWM_Velocity_Mode(unsigned char Group,unsigned char Numb
     unsigned short can_id = 0x004;
     CAN_HandleTypeDef* hcan=&hcan1;
     
-    hcan->pTxMsg->IDE = CAN_ID_STD;    //±ê×¼Ö¡
-    hcan->pTxMsg->RTR = CAN_RTR_DATA;  //Êı¾İÖ¡
-    hcan->pTxMsg->DLC = 0x08;          //Ö¡³¤¶ÈÎª8
+    hcan->pTxMsg->IDE = CAN_ID_STD;    //æ ‡å‡†å¸§
+    hcan->pTxMsg->RTR = CAN_RTR_DATA;  //æ•°æ®å¸§
+    hcan->pTxMsg->DLC = 0x08;          //å¸§é•¿åº¦ä¸º8
     
     switch(Group)
     {
@@ -483,7 +482,7 @@ void CAN_RoboModule_DRV_PWM_Velocity_Mode(unsigned char Group,unsigned char Numb
         default: return;
     }
     
-    hcan->pTxMsg->StdId = can_id;      //Ö¡IDÎª´«Èë²ÎÊıµÄCAN_ID
+    hcan->pTxMsg->StdId = can_id;      //å¸§IDä¸ºä¼ å…¥å‚æ•°çš„CAN_ID
 
     if(Temp_PWM > 5000)
     {
@@ -515,21 +514,21 @@ void CAN_RoboModule_DRV_PWM_Velocity_Mode(unsigned char Group,unsigned char Numb
 }
 
 /****************************************************************************************
-                                  PWMÎ»ÖÃÄ£Ê½ÏÂµÄÊı¾İÖ¸Áî
-temp_pwmµÄÈ¡Öµ·¶Î§ÈçÏÂ£º
+                                  PWMä½ç½®æ¨¡å¼ä¸‹çš„æ•°æ®æŒ‡ä»¤
+temp_pwmçš„å–å€¼èŒƒå›´å¦‚ä¸‹ï¼š
 0 ~ +5000
 
-temp_positionµÄÈ¡Öµ·¶Î§ÈçÏÂ£º
-32Î»ÓĞ·ûºÅÕûĞÍ
+temp_positionçš„å–å€¼èŒƒå›´å¦‚ä¸‹ï¼š
+32ä½æœ‰ç¬¦å·æ•´å‹
 *****************************************************************************************/
 void CAN_RoboModule_DRV_PWM_Position_Mode(unsigned char Group,unsigned char Number,short Temp_PWM,long Temp_Position)
 {
     unsigned short can_id = 0x005;
     CAN_HandleTypeDef* hcan=&hcan1;
     
-    hcan->pTxMsg->IDE = CAN_ID_STD;    //±ê×¼Ö¡
-    hcan->pTxMsg->RTR = CAN_RTR_DATA;  //Êı¾İÖ¡
-    hcan->pTxMsg->DLC = 0x08;          //Ö¡³¤¶ÈÎª8
+    hcan->pTxMsg->IDE = CAN_ID_STD;    //æ ‡å‡†å¸§
+    hcan->pTxMsg->RTR = CAN_RTR_DATA;  //æ•°æ®å¸§
+    hcan->pTxMsg->DLC = 0x08;          //å¸§é•¿åº¦ä¸º8
     
     switch(Group)
     {
@@ -565,7 +564,7 @@ void CAN_RoboModule_DRV_PWM_Position_Mode(unsigned char Group,unsigned char Numb
         default: return;
     }
     
-    hcan->pTxMsg->StdId = can_id;      //Ö¡IDÎª´«Èë²ÎÊıµÄCAN_ID
+    hcan->pTxMsg->StdId = can_id;      //å¸§IDä¸ºä¼ å…¥å‚æ•°çš„CAN_ID
 
     if(Temp_PWM > 5000)
     {
@@ -596,24 +595,24 @@ void CAN_RoboModule_DRV_PWM_Position_Mode(unsigned char Group,unsigned char Numb
 }
 
 /****************************************************************************************
-                                  PWMËÙ¶ÈÎ»ÖÃÄ£Ê½ÏÂµÄÊı¾İÖ¸Áî
-temp_pwmµÄÈ¡Öµ·¶Î§ÈçÏÂ£º
+                                  PWMé€Ÿåº¦ä½ç½®æ¨¡å¼ä¸‹çš„æ•°æ®æŒ‡ä»¤
+temp_pwmçš„å–å€¼èŒƒå›´å¦‚ä¸‹ï¼š
 0 ~ +5000
 
-temp_velocityµÄÈ¡Öµ·¶Î§ÈçÏÂ£º
+temp_velocityçš„å–å€¼èŒƒå›´å¦‚ä¸‹ï¼š
 0 ~ +32767
 
-temp_positionµÄÈ¡Öµ·¶Î§ÈçÏÂ£º
-32Î»ÓĞ·ûºÅÕûĞÍ
+temp_positionçš„å–å€¼èŒƒå›´å¦‚ä¸‹ï¼š
+32ä½æœ‰ç¬¦å·æ•´å‹
 *****************************************************************************************/
 void CAN_RoboModule_DRV_PWM_Velocity_Position_Mode(unsigned char Group,unsigned char Number,short Temp_PWM,short Temp_Velocity,long Temp_Position)
 {
     unsigned short can_id = 0x006;
     CAN_HandleTypeDef* hcan=&hcan1;
     
-    hcan->pTxMsg->IDE = CAN_ID_STD;    //±ê×¼Ö¡
-    hcan->pTxMsg->RTR = CAN_RTR_DATA;  //Êı¾İÖ¡
-    hcan->pTxMsg->DLC = 0x08;          //Ö¡³¤¶ÈÎª8
+    hcan->pTxMsg->IDE = CAN_ID_STD;    //æ ‡å‡†å¸§
+    hcan->pTxMsg->RTR = CAN_RTR_DATA;  //æ•°æ®å¸§
+    hcan->pTxMsg->DLC = 0x08;          //å¸§é•¿åº¦ä¸º8
     
     switch(Group)
     {
@@ -649,7 +648,7 @@ void CAN_RoboModule_DRV_PWM_Velocity_Position_Mode(unsigned char Group,unsigned 
         default: return;
     }
     
-    hcan->pTxMsg->StdId = can_id;      //Ö¡IDÎª´«Èë²ÎÊıµÄCAN_ID
+    hcan->pTxMsg->StdId = can_id;      //å¸§IDä¸ºä¼ å…¥å‚æ•°çš„CAN_ID
 
     if(Temp_PWM > 5000)
     {
@@ -685,11 +684,11 @@ void CAN_RoboModule_DRV_PWM_Velocity_Position_Mode(unsigned char Group,unsigned 
 }
 
 /****************************************************************************************
-                                  µçÁ÷ËÙ¶ÈÄ£Ê½ÏÂµÄÊı¾İÖ¸Áî
-temp_currentµÄÈ¡Öµ·¶Î§ÈçÏÂ£º
+                                  ç”µæµé€Ÿåº¦æ¨¡å¼ä¸‹çš„æ•°æ®æŒ‡ä»¤
+temp_currentçš„å–å€¼èŒƒå›´å¦‚ä¸‹ï¼š
 0 ~ +2000
 
-temp_velocityµÄÈ¡Öµ·¶Î§ÈçÏÂ£º
+temp_velocityçš„å–å€¼èŒƒå›´å¦‚ä¸‹ï¼š
 -32768 ~ +32767
 *****************************************************************************************/
 void CAN_RoboModule_DRV_Current_Velocity_Mode(unsigned char Group,unsigned char Number,short Temp_Current,short Temp_Velocity)
@@ -697,9 +696,9 @@ void CAN_RoboModule_DRV_Current_Velocity_Mode(unsigned char Group,unsigned char 
     unsigned short can_id = 0x007;
     CAN_HandleTypeDef* hcan=&hcan1;
     
-    hcan->pTxMsg->IDE = CAN_ID_STD;    //±ê×¼Ö¡
-    hcan->pTxMsg->RTR = CAN_RTR_DATA;  //Êı¾İÖ¡
-    hcan->pTxMsg->DLC = 0x08;          //Ö¡³¤¶ÈÎª8
+    hcan->pTxMsg->IDE = CAN_ID_STD;    //æ ‡å‡†å¸§
+    hcan->pTxMsg->RTR = CAN_RTR_DATA;  //æ•°æ®å¸§
+    hcan->pTxMsg->DLC = 0x08;          //å¸§é•¿åº¦ä¸º8
     
     switch(Group)
     {
@@ -735,7 +734,7 @@ void CAN_RoboModule_DRV_Current_Velocity_Mode(unsigned char Group,unsigned char 
         default: return;
     }
     
-    hcan->pTxMsg->StdId = can_id;      //Ö¡IDÎª´«Èë²ÎÊıµÄCAN_ID
+    hcan->pTxMsg->StdId = can_id;      //å¸§IDä¸ºä¼ å…¥å‚æ•°çš„CAN_ID
 
     if(Temp_Current > 2000)
     {
@@ -766,21 +765,21 @@ void CAN_RoboModule_DRV_Current_Velocity_Mode(unsigned char Group,unsigned char 
 }
 
 /****************************************************************************************
-                                  µçÁ÷Î»ÖÃÄ£Ê½ÏÂµÄÊı¾İÖ¸Áî
-temp_currentµÄÈ¡Öµ·¶Î§ÈçÏÂ£º
+                                  ç”µæµä½ç½®æ¨¡å¼ä¸‹çš„æ•°æ®æŒ‡ä»¤
+temp_currentçš„å–å€¼èŒƒå›´å¦‚ä¸‹ï¼š
 0 ~ +2000
 
-temp_positionµÄÈ¡Öµ·¶Î§ÈçÏÂ£º
-32Î»ÓĞ·ûºÅÕûĞÍ
+temp_positionçš„å–å€¼èŒƒå›´å¦‚ä¸‹ï¼š
+32ä½æœ‰ç¬¦å·æ•´å‹
 *****************************************************************************************/
 void CAN_RoboModule_DRV_Current_Position_Mode(unsigned char Group,unsigned char Number,short Temp_Current,long Temp_Position)
 {
     unsigned short can_id = 0x008;
     CAN_HandleTypeDef* hcan=&hcan1;
     
-    hcan->pTxMsg->IDE = CAN_ID_STD;    //±ê×¼Ö¡
-    hcan->pTxMsg->RTR = CAN_RTR_DATA;  //Êı¾İÖ¡
-    hcan->pTxMsg->DLC = 0x08;          //Ö¡³¤¶ÈÎª8
+    hcan->pTxMsg->IDE = CAN_ID_STD;    //æ ‡å‡†å¸§
+    hcan->pTxMsg->RTR = CAN_RTR_DATA;  //æ•°æ®å¸§
+    hcan->pTxMsg->DLC = 0x08;          //å¸§é•¿åº¦ä¸º8
     
     switch(Group)
     {
@@ -816,7 +815,7 @@ void CAN_RoboModule_DRV_Current_Position_Mode(unsigned char Group,unsigned char 
         default: return;
     }
     
-    hcan->pTxMsg->StdId = can_id;      //Ö¡IDÎª´«Èë²ÎÊıµÄCAN_ID
+    hcan->pTxMsg->StdId = can_id;      //å¸§IDä¸ºä¼ å…¥å‚æ•°çš„CAN_ID
 
     if(Temp_Current > 2000)
     {
@@ -847,24 +846,24 @@ void CAN_RoboModule_DRV_Current_Position_Mode(unsigned char Group,unsigned char 
 }
 
 /****************************************************************************************
-                                  µçÁ÷ËÙ¶ÈÎ»ÖÃÄ£Ê½ÏÂµÄÊı¾İÖ¸Áî
-temp_currentµÄÈ¡Öµ·¶Î§ÈçÏÂ£º
+                                  ç”µæµé€Ÿåº¦ä½ç½®æ¨¡å¼ä¸‹çš„æ•°æ®æŒ‡ä»¤
+temp_currentçš„å–å€¼èŒƒå›´å¦‚ä¸‹ï¼š
 0 ~ +2000
 
-temp_velocityµÄÈ¡Öµ·¶Î§ÈçÏÂ£º
+temp_velocityçš„å–å€¼èŒƒå›´å¦‚ä¸‹ï¼š
 0 ~ +32767
 
-temp_positionµÄÈ¡Öµ·¶Î§ÈçÏÂ£º
-32Î»ÓĞ·ûºÅÕûĞÍ
+temp_positionçš„å–å€¼èŒƒå›´å¦‚ä¸‹ï¼š
+32ä½æœ‰ç¬¦å·æ•´å‹
 *****************************************************************************************/
 void CAN_RoboModule_DRV_Current_Velocity_Position_Mode(unsigned char Group,unsigned char Number,short Temp_Current,short Temp_Velocity,long Temp_Position)
 {
     unsigned short can_id = 0x009;
     CAN_HandleTypeDef* hcan=&hcan1;
     
-    hcan->pTxMsg->IDE = CAN_ID_STD;    //±ê×¼Ö¡
-    hcan->pTxMsg->RTR = CAN_RTR_DATA;  //Êı¾İÖ¡
-    hcan->pTxMsg->DLC = 0x08;          //Ö¡³¤¶ÈÎª8
+    hcan->pTxMsg->IDE = CAN_ID_STD;    //æ ‡å‡†å¸§
+    hcan->pTxMsg->RTR = CAN_RTR_DATA;  //æ•°æ®å¸§
+    hcan->pTxMsg->DLC = 0x08;          //å¸§é•¿åº¦ä¸º8
     
     switch(Group)
     {
@@ -900,7 +899,7 @@ void CAN_RoboModule_DRV_Current_Velocity_Position_Mode(unsigned char Group,unsig
         default: return;
     }
     
-    hcan->pTxMsg->StdId = can_id;      //Ö¡IDÎª´«Èë²ÎÊıµÄCAN_ID
+    hcan->pTxMsg->StdId = can_id;      //å¸§IDä¸ºä¼ å…¥å‚æ•°çš„CAN_ID
 
     if(Temp_Current > 2000)
     {
@@ -931,19 +930,19 @@ void CAN_RoboModule_DRV_Current_Velocity_Position_Mode(unsigned char Group,unsig
 }
 
 /****************************************************************************************
-                                      ÅäÖÃÖ¸Áî
-Temp_TimeµÄÈ¡Öµ·¶Î§: 0 ~ 255£¬Îª0Ê±ºò£¬Îª¹Ø±ÕµçÁ÷ËÙ¶ÈÎ»ÖÃ·´À¡¹¦ÄÜ
-Ctl1_Ctl2µÄÈ¡Öµ·¶Î§£º0 or 1 £¬µ±²»Îª0 or 1£¬ÔòÈÏÎªÊÇ0£¬Îª¹Ø±Õ×óÓÒÏŞÎ»¼ì²â¹¦ÄÜ
-ÌØ±ğÌáÊ¾£ºCtl1£¬Ctl2µÄ¹¦ÄÜ½ö´æÔÚÓÚRMDS-102£¬ÆäÓà°æ±¾Çı¶¯Æ÷£¬Ctl1_Ctl2 = 0 ¼´¿É
+                                      é…ç½®æŒ‡ä»¤
+Temp_Timeçš„å–å€¼èŒƒå›´ï¼š 0 ~ 255ï¼Œ ä¸º0çš„æ—¶å€™ï¼Œä¸ºå…³é—­ç”µæµé€Ÿåº¦ä½ç½®åé¦ˆåŠŸèƒ½
+Ctl1_Ctl2çš„å–å€¼èŒƒå›´ï¼š 0 or 1ï¼Œ å½“ä¸ä¸º0 or 1ï¼Œåˆ™è®¤ä¸ºæ˜¯0ï¼Œ ä¸ºå…³é—­å·¦å³é™ä½æ£€æµ‹åŠŸèƒ½
+ç‰¹åˆ«æç¤ºï¼š Ctl1ï¼ŒCtl2çš„åŠŸèƒ½ä»…å­˜åœ¨äºRMDS-102ï¼Œå…¶ä½™ç‰ˆæœ¬é©±åŠ¨å™¨ï¼ŒCtl1_Ctl2 = 0 å³å¯
 *****************************************************************************************/
 void CAN_RoboModule_DRV_Config(unsigned char Group,unsigned char Number,unsigned char Temp_Time,unsigned char Ctl1_Ctl2)
 {
     unsigned short can_id = 0x00A;
     CAN_HandleTypeDef* hcan=&hcan1;
     
-    hcan->pTxMsg->IDE = CAN_ID_STD;    //±ê×¼Ö¡
-    hcan->pTxMsg->RTR = CAN_RTR_DATA;  //Êı¾İÖ¡
-    hcan->pTxMsg->DLC = 0x08;          //Ö¡³¤¶ÈÎª8
+    hcan->pTxMsg->IDE = CAN_ID_STD;    //æ ‡å‡†å¸§
+    hcan->pTxMsg->RTR = CAN_RTR_DATA;  //æ•°æ®å¸§
+    hcan->pTxMsg->DLC = 0x08;          //å¸§é•¿åº¦ä¸º8
     
     switch(Group)
     {
@@ -960,7 +959,7 @@ void CAN_RoboModule_DRV_Config(unsigned char Group,unsigned char Number,unsigned
     
     switch(Number)
     {
-        case 0x1: //±¾Ö¸Áî²»Ö§³Ö¹ã²¥£¬ËùÒÔ´Ë´¦Ã»ÓĞ0ºÅÇı¶¯Æ÷
+			case 0x1: //æœ¬æŒ‡ä»¤ä¸æ”¯æŒå¹¿æ’­ï¼Œæ‰€ä»¥æ­¤å¤„æ²¡æœ‰0å·é©±åŠ¨å™¨
         case 0x2:
         case 0x3:
         case 0x4:
@@ -983,7 +982,7 @@ void CAN_RoboModule_DRV_Config(unsigned char Group,unsigned char Number,unsigned
         Ctl1_Ctl2 = 0x00;
     }
     
-    hcan->pTxMsg->StdId = can_id;      //Ö¡IDÎª´«Èë²ÎÊıµÄCAN_ID
+    hcan->pTxMsg->StdId = can_id;      //å¸§IDä¸ºä¼ å…¥å‚æ•°çš„CAN_ID
     
     hcan->pTxMsg->Data[0] = Temp_Time;
     hcan->pTxMsg->Data[1] = Ctl1_Ctl2;
@@ -1000,16 +999,16 @@ void CAN_RoboModule_DRV_Config(unsigned char Group,unsigned char Number,unsigned
 }
 
 /****************************************************************************************
-                                      ÔÚÏß¼ì²â
+                                      åœ¨çº¿æ£€æµ‹
 *****************************************************************************************/
 void CAN_RoboModule_DRV_Online_Check(unsigned char Group,unsigned char Number)
 {
     unsigned short can_id = 0x00F;
     CAN_HandleTypeDef* hcan=&hcan1;
     
-    hcan->pTxMsg->IDE = CAN_ID_STD;    //±ê×¼Ö¡
-    hcan->pTxMsg->RTR = CAN_RTR_DATA;  //Êı¾İÖ¡
-    hcan->pTxMsg->DLC = 0x08;          //Ö¡³¤¶ÈÎª8
+    hcan->pTxMsg->IDE = CAN_ID_STD;    //æ ‡å‡†å¸§
+    hcan->pTxMsg->RTR = CAN_RTR_DATA;  //æ•°æ®å¸§
+    hcan->pTxMsg->DLC = 0x08;          //å¸§é•¿åº¦ä¸º8
     
     switch(Group)
     {
@@ -1026,7 +1025,7 @@ void CAN_RoboModule_DRV_Online_Check(unsigned char Group,unsigned char Number)
     
     switch(Number)
     {
-        case 0x1: //±¾Ö¸Áî²»Ö§³Ö¹ã²¥£¬ËùÒÔ´Ë´¦Ã»ÓĞ0ºÅÇı¶¯Æ÷
+        case 0x1: //æœ¬æŒ‡ä»¤ä¸æ”¯æŒå¹¿æ’­ï¼Œæ‰€ä»¥æ­¤å¤„æ²¡æœ‰0å·é©±åŠ¨å™¨
         case 0x2:
         case 0x3:
         case 0x4:
@@ -1044,7 +1043,7 @@ void CAN_RoboModule_DRV_Online_Check(unsigned char Group,unsigned char Number)
         default: return;
     }
     
-    hcan->pTxMsg->StdId = can_id;      //Ö¡IDÎª´«Èë²ÎÊıµÄCAN_ID
+    hcan->pTxMsg->StdId = can_id;      //å¸§IDä¸ºä¼ å…¥å‚æ•°çš„CAN_ID
     
     hcan->pTxMsg->Data[0] = 0x55;
     hcan->pTxMsg->Data[1] = 0x55;

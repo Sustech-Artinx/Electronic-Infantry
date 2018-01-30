@@ -3,24 +3,24 @@
   cpu           :  STM32F405RGT6
   Create Date   :  2016/6/29
   Author        :  yf
-  Description   :  Õë¶ÔRM35ºÍRM3510µ×ÅÌÔË¶¯µÄ×ÔÏÂ¶øÉÏµÄ¿ØÖÆ¡£
-									 ÆäÖĞÊ×ÏÈÊÇRM3510µÄPIDµçÁ÷»·ºÍÎ»ÖÃ»·£¨Î´Íê³É£©¿ØÖÆ£¬
-									 È»ºóÊÇµç»úÔÚĞ¡³µµ×ÅÌÔË¶¯¿ØÖÆ£¬
-									 ×îºóÊÇÒ£¿ØÆ÷ºÍ¼üÅÌ¶ÔÓÚÔË¶¯µÄ¿ØÖÆ¡£
+  Description   :  é’ˆå¯¹RM35å’ŒRM3510åº•ç›˜è¿åŠ¨çš„è‡ªä¸‹è€Œä¸Šçš„æ§åˆ¶
+	                 å…¶ä¸­é¦–å…ˆæ˜¯RM3510çš„PIDç”µæµç¯å’Œä½ç½®ç¯ï¼ˆæœªå®Œæˆï¼‰æ§åˆ¶
+									 ç„¶åæ˜¯ç”µæœºåœ¨å°è½¦åº•ç›˜è¿åŠ¨æ§åˆ¶
+									 ç„¶åæ˜¯é¥æ§å™¨å¥½é”®ç›˜å¯¹äºè¿åŠ¨çš„æ§åˆ¶
 									 
 
 -------------------------------Revision Histroy-----------------------------------
 No   Version    Date     Revised By       Item       Description   
-1     1.1       6/28       yf   			  Èı²ãµ×ÅÌ¿ØÖÆ	
+1     1.1       6/28       yf   			  ä¸‰å±‚åº•ç›˜æ§åˆ¶	
 2     1.2       6/29       gyf 
-3     1.3       6/29       yf 					  ×¢ÊÍ			   
+3     1.3       6/29       yf 					  æ³¨é‡Š			   
 ************************************************************************************/
 #include "chassis_control.h"
 #include "pid_algorithm.h"
 #include "test_can1.h"
 #include "can.h"
 #include "dbus.h"
-int moveSpeed;//¿ØÖÆµÄËÙ¶ÈRPM
+int moveSpeed;//æ§åˆ¶çš„é€Ÿåº¦RPM
 
 RM3510_DATA RM3510_1={0,0,0,0,0,0,1};
 RM3510_DATA RM3510_2={0,0,0,0,0,0,2};
@@ -33,7 +33,7 @@ RM35_DATA RM35_3;
 RM35_DATA RM35_4;
 
 
-//RM3510µçµ÷
+//RM3510ç”µè°ƒ
 void ChassisMotor_Velocity_Control(float vel1,float vel2,float vel3,float vel4)
 {  
 	 RM3510_1.targetVelocity=vel1*19;
@@ -67,12 +67,12 @@ void ChassisMotor_Position_Control(float pos1,float pos2,float pos3,float pos4)
 	 
 	 RM3510_4.position_output = Position_Control_820R(RM3510_4.thisPosition, RM3510_4.targetPosition);
 	 RM3510_4.velocity_output = Velocity_Control_820R(RM3510_4.thisVelocity ,RM3510_4.position_output);
-	 //ĞèÒªcan2.cµÄÊı¾İ£¬ÔİÊ±Ã»ÓĞĞ´£¬µÈcan2Íê³ÉĞèÒª¼ÓÈë	 
+	 //éœ€è¦can2.cçš„æ•°æ®ï¼Œæš‚æ—¶æ²¡æœ‰å†™ï¼Œç­‰can2å®Œæˆæ—¶éœ€è¦åŠ å…¥
 	 Cmd_ESC_820R(RM3510_1.velocity_output, RM3510_2.velocity_output, RM3510_3.velocity_output, RM3510_4.velocity_output);
 
 }
 
-//µç»úÔË¶¯
+//ç”µæœºè¿åŠ¨
 void TransMove(int x,int y,int z,long temp_speed)
 { //printf("HH");
 	long vf,vtr,vrr,vt,top_speed;
@@ -85,7 +85,7 @@ void TransMove(int x,int y,int z,long temp_speed)
 		vtr=(x*top_speed)/vt;
 		vrr=(z*top_speed)/vt;
 	}
-	//ÖØÖÃ³õÊ¼»¯ºÍÄ£Ê½Ñ¡ÔñÔÚmainÖĞĞ´
+	//é‡ç½®åˆå§‹åŒ–å’Œè¿åŠ¨æ¨¡å¼åœ¨mainä¸­å†™
 	#ifdef RM35
 	CAN_RoboModule_DRV_PWM_Velocity_Mode(0,1,5000,vf+vtr+vrr);	
 	CAN_RoboModule_DRV_PWM_Velocity_Mode(0,2,5000,vf-vtr-vrr);
@@ -99,10 +99,10 @@ void TransMove(int x,int y,int z,long temp_speed)
 }
 
 
-//rcºÍkey¿ØÖÆµç»úÔË¶¯
+//rcå’Œkeyæ§åˆ¶ç”µæœºè¿åŠ¨
 void move_control(uint16_t ch0, uint16_t ch1, uint16_t ch2, uint8_t s1, uint16_t v, int16_t x)
 {
-	//¼üÅÌ¼üÎ»½âÎö
+	//é”®ç›˜é”®ä½è§£æ 
 				int key_SHIFT = KEY_PRESSED_OFFSET_SHIFT & v; 
 				int key_CTRL = KEY_PRESSED_OFFSET_CTRL & v; 
 				int key_W = KEY_PRESSED_OFFSET_W & v; 
@@ -117,7 +117,7 @@ void move_control(uint16_t ch0, uint16_t ch1, uint16_t ch2, uint8_t s1, uint16_t
 				if (key_S!=0) key_S=1;
 				if (key_D!=0) key_D=1;
 
-				//Î´Ê¹ÓÃµÄ¼üÎ»
+				//æœªä½¿ç”¨çš„é”®ä½
 				//if (KEY_PRESSED_OFFSET_R & v);//R pressed >>>> Reloading signal send
 				//if (KEY_PRESSED_OFFSET_F & v);//F pressed >>>> Laser on/off
 				//if (KEY_PRESSED_OFFSET_Z & v);//Z pressed
@@ -125,14 +125,14 @@ void move_control(uint16_t ch0, uint16_t ch1, uint16_t ch2, uint8_t s1, uint16_t
 				//if (KEY_PRESSED_OFFSET_C & v);//C pressed
 				//if (KEY_PRESSED_OFFSET_V & v);//V pressed
 				//if (KEY_PRESSED_OFFSET_B & v);//B pressed
-	//Ä¬ÈÏËÙ¶È
+	//é»˜è®¤é€Ÿåº¦
 	moveSpeed=NormalSpeed;
 	if(s1==1){
-	moveSpeed=HighSpeed;}//¿ÉÒÔ¿¼ÂÇÌá¸ßµ½180
+	moveSpeed=HighSpeed;}//å¯ä»¥è€ƒè™‘æé«˜åˆ°180
 	else if(s1==3){
-	moveSpeed=NormalSpeed;}//Ìá¸ßµ½110
+	moveSpeed=NormalSpeed;}//æé«˜åˆ°110
 	else if(s1==2){
-	moveSpeed=LowSpeed;}//µ½60
+	moveSpeed=LowSpeed;}//åˆ°60
 	if(key_CTRL==1){
 	moveSpeed=LowSpeed;}
 	if(key_SHIFT==1){

@@ -4,8 +4,8 @@
 
 #define GAP 0.0f
 /********************************************************************************
-                         pitchÖáµçµ÷°åµÄËÙ¶È»·¿ØÖÆ
-                    ÊäÈë pitchÖáµ±Ç°ËÙ¶È pitchÖáÄ¿±êËÙ¶È
+                         pitchè½´ç”µè°ƒæ¿çš„é€Ÿåº¦ç¯æ§åˆ¶
+                    è¾“å…¥ pitchè½´å½“å‰é€Ÿåº¦ pitchè½´ç›®æ ‡é€Ÿåº¦
 //	#define YAW_205_VEL_P 8.0
 //	#define YAW_205_VEL_D 0.0
 //	#define YAW_205_POS_P 2.0
@@ -50,13 +50,13 @@ float Velocity_Control_206(float current_velocity_206,float target_velocity_206)
         output = -ESC_MAX;
     }
     
-    return -output;//cyq:for6015 ·´Ïò
+    return -output;//cyq:for6015 åå‘
 }
 
 
 /********************************************************************************
-                         pitchÖáµçµ÷°åµÄÎ»ÖÃ»·¿ØÖÆ 
-                    ÊäÈë pitchÖáµ±Ç°Î»ÖÃ pitchÖáÄ¿±êÎ»ÖÃ
+                         pitchè½´ç”µè°ƒæ¿çš„ä½ç½®ç¯æ§åˆ¶
+                    è¾“å…¥ pitchè½´å½“å‰ä½ç½® pitchè½´ç›®æ ‡ä½ç½®
 *********************************************************************************/
 float Position_Control_206(float current_position_206,float target_position_206)
 {
@@ -88,8 +88,8 @@ float Position_Control_206(float current_position_206,float target_position_206)
     return -output;
 }
 /********************************************************************************
-                           yawÖáµçµ÷°åµÄËÙ¶È»·¿ØÖÆ
-                      ÊäÈë yawÖáµ±Ç°ËÙ¶È yawÖáÄ¿±êËÙ¶È
+                           yawè½´ç”µè°ƒæ¿çš„é€Ÿåº¦ç¯æ§åˆ¶
+                      è¾“å…¥ yawè½´å½“å‰é€Ÿåº¦ yawè½´ç›®æ ‡é€Ÿåº¦
 *********************************************************************************/
 float Velocity_Control_205(float current_velocity_205,float target_velocity_205)
 {   
@@ -127,12 +127,12 @@ float Velocity_Control_205(float current_velocity_205,float target_velocity_205)
         output = -ESC_MAX;
     }
     
-    return -output;//cyq:for6015 ·´Ïò
+    return -output;//cyq:for6015 åå‘
 }
 
 /********************************************************************************
-                           yawÖáµçµ÷°åµÄÎ»ÖÃ»·¿ØÖÆ
-                      ÊäÈë yawÖáµ±Ç°Î»ÖÃ yawÖáÄ¿±êÎ»ÖÃ
+                           yawè½´ç”µè°ƒæ¿çš„ä½ç½®ç¯æ§åˆ¶
+                      è¾“å…¥ yawè½´å½“å‰ä½ç½® yawè½´ç›®æ ‡ä½ç½®
 *********************************************************************************/
 float Position_Control_205(float current_position_205,float target_position_205)
 {   
@@ -156,15 +156,15 @@ float Position_Control_205(float current_position_205,float target_position_205)
     }
     
     if(output < -ESC_MAX)
-    {
+    { 
         output = -ESC_MAX;
     }
     
     return -output;
 }
 /********************************************************************************
-                           820RÖáµçµ÷°åµÄËÙ¶È»·¿ØÖÆ
-                      ÊäÈë 820RÖáµ±Ç°ËÙ¶È 820RÖáÄ¿±êËÙ¶È
+                           820Rè½´ç”µè°ƒæ¿çš„é€Ÿåº¦ç¯æ§åˆ¶
+                      è¾“å…¥ 820Rè½´å½“å‰é€Ÿåº¦ 820Rè½´ç›®æ ‡é€Ÿåº¦
 *********************************************************************************/
 float Velocity_Control_820R(float current_velocity_820R,float target_velocity_820R)
 {
@@ -197,8 +197,8 @@ float Velocity_Control_820R(float current_velocity_820R,float target_velocity_82
     return output;
 }
 /********************************************************************************
-                           820Rµçµ÷°åµÄÎ»ÖÃ»·¿ØÖÆ
-                      ÊäÈë 820RÖáµ±Ç°Î»ÖÃ 820RÖáÄ¿±êÎ»ÖÃ
+                           820Rè½´ç”µè°ƒæ¿çš„ä½ç½®ç¯æ§åˆ¶
+                      è¾“å…¥ 820Rè½´å½“å‰ä½ç½® 820Rè½´ç›®æ ‡ä½ç½®
 *********************************************************************************/
 float Position_Control_820R(float current_position_820R,float target_position_820R)
 {
@@ -231,8 +231,8 @@ float Position_Control_820R(float current_position_820R,float target_position_82
     return output;
 }
 /********************************************************************************
-                           ²¦µ¯µç»úµÄËÙ¶È»·¿ØÖÆ
-                      ÊäÈë ²¦µ¯µç»úµ±Ç°ËÙ¶È ²¦µ¯µç»úÄ¿±êËÙ¶È
+                           æ‹¨å¼¹ç”µæœºçš„çš„é€Ÿåº¦ç¯æ§åˆ¶
+                      è¾“å…¥ æ‹¨å¼¹ç”µæœºå½“å‰é€Ÿåº¦ æ‹¨å¼¹ç”µæœºç›®æ ‡é€Ÿåº¦
 *********************************************************************************/
 float Velocity_Control_Shoot(float current_velocity_Shoot,float target_velocity_Shoot)
 {
