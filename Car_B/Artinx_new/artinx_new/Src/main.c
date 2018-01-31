@@ -150,7 +150,7 @@ int main(void)
 	Initialization();   	
 	delay_ms(2000);
 	
-	UARTProtocol_UART3_Init();
+	UARTProtocol_UART6_Init();
   /* USER CODE END 2 */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -185,16 +185,20 @@ int main(void)
 			BLDC_control(dbus.rc.s2, dbus.mouse.r);
 			Fire(dbus.rc.s2,dbus.mouse.l);				
 		}
-		UART_Protocol_Unpacker(&hprotocol_uart3);
-		if(hprotocol_uart3.isFrameReceived){
-			hprotocol_uart3.isFrameReceived = false;
+		UART_Protocol_Unpacker(&hprotocol_uart6);
+		if(hprotocol_uart6.isFrameReceived){
+			hprotocol_uart6.isFrameReceived = false;
 			extern M6623 yaw;
 			extern M6623 pitch;
-			uint8_t *angleData = hprotocol_uart3.buffer;
-			yaw.targetAngle = angleData[0];
-			yaw.targetAngle |= angleData[1]<<8;
-			pitch.targetAngle = angleData[2];
-			pitch.targetAngle |= angleData[3]<<8;
+			uint8_t *angleData = hprotocol_uart6.buffer;
+			int16_t yaw_change = 0;
+			int16_t pitch_change = 0;
+			yaw_change = angleData[0];
+			yaw_change |= angleData[1]<<8;
+			pitch_change = angleData[2];
+			pitch_change |= angleData[3]<<8;
+			yaw.targetAngle += yaw_change;
+			pitch.targetAngle += pitch_change;
 			//HAL_UART_Transmit(&huart6, hprotocol_uart3.buffer, hprotocol_uart3.dataLen, 100);
 		}
 	}
