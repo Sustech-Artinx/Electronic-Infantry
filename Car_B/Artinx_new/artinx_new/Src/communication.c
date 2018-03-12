@@ -68,5 +68,6 @@ void UART_Protocol_Unpacker(UARTProtocol_HandleTypeDef *handler){
 				}
 			}
 		}
+		if(handler->isFrameReceived == true){break;}
 	}
 }
